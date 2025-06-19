@@ -26,7 +26,9 @@ const Styles = {
 
 function Footer(){
 return(
-    <footer style={{display: "flex", flexDirection: "column", paddingLeft: "200px", gap: "50px", backgroundColor: "#eeeeee",paddingTop: "50px", paddingRight: "300px"}}>
+    <footer style={{ backgroundColor: "#eeeeee",paddingTop: "100px"}}>
+        <Box sx={{display: "flex", flexDirection: "column", paddingLeft: { xs: "0", sm: "10px", md: "150px", xl: "200px"},
+         paddingRight: { xs: "0", sm: "100px", md: "150px", xl: "200px"}, gap: "30px"}}>
         {/*The Logo*/}
         <Box>
             <img src={FooterLogo} alt="CleanCloud" />
@@ -115,6 +117,7 @@ return(
             <Box sx={{flex: 1}}></Box>
             <Link sx={Styles.link}>Terms: Privacy</Link>
             </Stack>
+            </Box>
          </footer>
 )
 }
