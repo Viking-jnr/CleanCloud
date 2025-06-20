@@ -1,4 +1,4 @@
-import { Box, Link, Paper, Stack, Typography } from "@mui/material";
+import { Box, Link, Paper, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import FooterLogo from "../assets/Images/logo_footer.svg";
 import { Email, Facebook, Instagram, LinkedIn, Smartphone, Style, Twitter, YouTube } from "@mui/icons-material";
 
@@ -25,16 +25,19 @@ const Styles = {
 }
 
 function Footer(){
+    const theme = useTheme();
+    const isTablet = useMediaQuery(theme.breakpoints.down('sm'));
+
 return(
     <footer style={{ backgroundColor: "#eeeeee",paddingTop: "100px"}}>
-        <Box sx={{display: "flex", flexDirection: "column", paddingLeft: { xs: "0", sm: "10px", md: "150px", xl: "200px"},
+        <Box sx={{display: "flex", flexDirection: "column", paddingLeft: { xs: "0", sm: "100px", md: "150px", xl: "200px"},
          paddingRight: { xs: "0", sm: "100px", md: "150px", xl: "200px"}, gap: "30px"}}>
         {/*The Logo*/}
         <Box>
             <img src={FooterLogo} alt="CleanCloud" />
         </Box>
 
-        <Box display={"flex"} flexDirection={"row"}>
+        <Box sx={{ display: "flex", flexDirection:isTablet ? "column": "row" }}>
             <Box sx={{width: "50%"}}>
                 <Typography variant="h6" fontWeight={"bold"} fontSize={25} color="#353839">Need help?</Typography>
                 <Typography color="#353839" fontSize={25}>CleanCloud support is available 24/7</Typography>

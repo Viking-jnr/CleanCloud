@@ -10,12 +10,18 @@ function App() {
       mode: "light",
       text:{
         primary: "#212121",
-        secondary: " #29b6f6"
-      }
-    }
+        secondary: "#778899",
+      },
+      background:{
+        default: "white", 
+        paper: "#eeeeee"
+      },
+    },
   })
 
   return (
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
     <BrowserRouter>
     <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
     <Header />
@@ -28,6 +34,7 @@ function App() {
     <Footer />
     </div>
     </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
