@@ -52,15 +52,17 @@ const Header = () => {
     const Styles = {
         text: {
             fontSize: 15,
-            color: "text.secondary"
+            color: "text.primary"
         },
         title: {
             fontWeight: "bold"
         }
     }
+
+    
     return(
         <AppBar position="static" 
-        sx={{backgroundColor: "background.default", position: " fixed"}}>
+        sx={{backgroundColor: "background.default", position: " fixed", zIndex: 1000}}>
             <Container maxWidth="xl">
                 <Toolbar sx={{display:"flex", flexDirection: "row",paddingLeft: { xs: "0", sm: "10px", md: "50px", xl: "0"},
                     paddingRight: { xs: "0", sm: "10px", md: "50px", xl: "200px"}, gap: "10px"}}>
@@ -97,7 +99,7 @@ const Header = () => {
                             anchorEl={anchorEl}
                             placement= "bottom-start"
                             disablePortal>
-                            <Paper elevation={3} sx={{ p: 2, display: "flex", flexDirection: "row" , width: "1000px", maxHeight: "80vh"}}>
+                            <Paper elevation={5} sx={{ p: 2, display: "flex", flexDirection: "row" , width: "1000px", maxHeight: "80vh"}}>
                             {/*Items on the left*/}
                                 <Grid container spacing={2} sx={{ p: 2,display:"flex", flexDirection:"column"}}>
                                 {Features1.map((item, index)=> (

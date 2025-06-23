@@ -9,12 +9,12 @@ function App() {
     palette: {
       mode: "light",
       text:{
-        primary: "#212121",
-        secondary: "#778899",
+        primary: "#1C1C1C", //black default color for text
+        secondary: "#f0f0f0",//white secondary color for text
       },
       background:{
         default: "white", 
-        paper: "#eeeeee"
+        paper: "white"
       },
     },
   })
