@@ -117,7 +117,7 @@ const Home = () =>{
 
         {/*Dry Cleaning Tab*/}
         {activeTab === 0 &&(
-            <Box sx={Styles.tab} >
+            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}} >
                 <Box onClick={() => {window.open("https://youtu.be/d2eGNUGcdhs","youtubePopup", "width=700, height=500")} }
                 sx={{cursor: "pointer", width: "70%", position: "relative"}} pl={10} pr={0} py={7}>
                     <img src={testimonials1} alt="Testimonial" width={"100%"} height={"100%"} style={{objectFit: 'cover'}} /> 
@@ -172,7 +172,7 @@ const Home = () =>{
 
         {/*Laundromat Tab*/}
         {activeTab === 1 && (
-            <Box sx={Styles.tab}>
+            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}}>
                 <Box sx={{cursor: "pointer", width: "70%", position: "relative"}} pl={10} pr={0} py={7}
                 onClick={() => {window.open("https://youtu.be/jYYRLj0MFDg","youtubePopup", "width=700, height=500")} }>
                     <img src={laundromat} alt="Laundromat Testimonial" style={{borderRadius: "15px"}} />
@@ -227,7 +227,7 @@ const Home = () =>{
 
         {/*Alterations Tab*/}
         {activeTab === 2 && (
-            <Box sx={Styles.tab}>
+            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}}>
                 <Box sx={{ width: "70%", position: "relative"}} pl={10} pr={0} py={7}>
                 <img src={alterations} alt="Alterations" style={{borderRadius: "15px", height: "550px"}}/>
 
@@ -275,7 +275,7 @@ const Home = () =>{
 
         {/*Shoe Cleaning Tab*/}
         {activeTab === 3 &&(
-            <Box sx={Styles.tab}>
+            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}}>
                 <Box sx={{ width: "70%", position: "relative"}} pl={10} pr={0} py={7}>
                 <img src={shoeCleaning} alt="Shoe Cleaning" style={{borderRadius: "15px", height: "500px"}}/>
 

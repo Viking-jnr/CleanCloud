@@ -1,10 +1,12 @@
-import { AppBar, Box, Button, Container, styled, Toolbar, Popper, Paper, Typography, Grid, useMediaQuery, IconButton} from "@mui/material"
+import { AppBar, Box, Button, Container, styled, Toolbar, Popper, Paper, Typography, Grid, useMediaQuery, IconButton, Drawer, 
+    List, ListItemButton, ListItemText, Collapse,
+    Stack} from "@mui/material"
 import Logo from "../assets/Images/CleanCloudLogo.svg"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
-import { Menu as MenuIcon } from "@mui/icons-material";
+import { ArrowDropUp, Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
 
 
 
@@ -22,6 +24,7 @@ const Header = () => {
     const theme= useTheme();
     const navigate= useNavigate();
     const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
+    {/*Anchor element for drop down menu*/}
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -48,6 +51,19 @@ const Header = () => {
         {title: "Marketing", text: "Send out marketing via SMS, targeting key sections of your customers"},
         {title: "Security", text: "We backup your data everyday to independent servers"}
     ]
+
+    {/*Drawer for navigation for smaller screens*/}
+    const [openDrawer, setOpenDrawer] = useState(false);
+    const toggleDrawer = (state) => () => {
+        setOpenDrawer(state);
+    }
+
+    {/*Drop down  menu for Features in smaller screens*/}
+    const [openFeatures, setOpenFeatures] = useState(false);
+    const toggleFeatures = (state) => () => {
+        setOpenFeatures(state);
+    }
+
     {/*Styled components*/}
     const Styles = {
         text: {
@@ -61,6 +77,7 @@ const Header = () => {
 
     
     return(
+        <>
         <AppBar position="static" 
         sx={{backgroundColor: "background.default", position: " fixed", zIndex: 1000}}>
             <Container maxWidth="xl">
@@ -74,8 +91,8 @@ const Header = () => {
                     {isTablet && (
                         <>
                         <Box sx={{ flex: 1}}></Box>
-                        <IconButton edge="end" size="large" color="black">
-                            <MenuIcon />
+                        <IconButton edge="end" size="large" color="black" onClick={() => setOpenDrawer(!openDrawer)}>
+                            { openDrawer ? <CloseIcon /> : <MenuIcon /> }
                         </IconButton>
                         </>
                     )}
@@ -92,6 +109,7 @@ const Header = () => {
                             <NavButton endIcon={<ArrowDropDownIcon sx={{color: " #29b6f6"}}/>}>
                             Features
                             </NavButton>
+
                         {/* A  popper for the drop down menu */}
                             <Popper
                             id = "Features-menu"
@@ -133,10 +151,12 @@ const Header = () => {
                         <NavButton>Blog</NavButton>
                     </Box>
                     <Box sx={{display: "flex",gap: "10px"}}>
-                        <Button sx={{textTransform: "none", display: "in-block",color: "black", backgroundColor: "#E0E0E0", borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}>
+                        <Button sx={{textTransform: "none", display: "in-block",color: "black", backgroundColor: "#E0E0E0", 
+                        borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}>
                             Log in
                         </Button>
-                        <Button sx={{textTransform: "none", display: "in-block",color: "white", backgroundColor: " #29b6f6", borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}>
+                        <Button sx={{textTransform: "none", display: "in-block",color: "white", backgroundColor: " #29b6f6", 
+                        borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}>
                             Free Trial
                         </Button>
                     </Box>
@@ -145,6 +165,54 @@ const Header = () => {
                 </Toolbar>
             </Container>
         </AppBar>
+
+        {/*Navigating the drawer for mobile*/}
+        <Collapse in={openDrawer}>
+        <Paper  elevation={5} 
+        sx={{zIndex: 900, top: "50px", py: 2, px: 2, width: "100%", display: {lg: "none"}, position: "absolute" }}>
+        <List>
+            <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} onMouseEnter={toggleFeatures(true)} 
+            sx={{'&:hover':{color: " #29b6f6", backgroundColor: "background.default"}}} >
+                <ListItemText primary="Features" slotProps={{primary: {fontWeight: "bold"}}} />
+                <IconButton edge="end">
+                    {openFeatures ? <ArrowDropUp sx={{color: " #29b6f6"}}/> : <ArrowDropDownIcon sx={{color: " #29b6f6"}}/>}
+                </IconButton>
+            </ListItemButton>
+
+            {/* Drop Down Features items */}
+            {openFeatures && (
+                <Paper elevation={0} onMouseLeave={toggleFeatures(false)} sx={{paddingLeft: "20px", borderTop: "none", borderRight: "none", 
+                borderBottom: "none", borderLeft: "1px solid #E0E0E0"}}>
+                    {["Point of Sale", "Hosted Website", "Assembly","Hardware", "Pickups and Delivery","Payments",
+                     "Lockers", "Reporting", "Multiple Stores and Plant", "Marketing", "Laundromat", "Security"].map((text) => (
+                <ListItemButton key={text} onClick={toggleDrawer(false)} sx={{'&:hover':{color: " #29b6f6", backgroundColor: "background.default"}}}>
+                    <ListItemText primary={text} slotProps={{primary: {fontWeight: "bold"}}} />
+                </ListItemButton>
+            ))}
+                </Paper>
+            )}
+
+            {["Multi-Store", "Testimonials", "Pricing","Grow Your Business", "Blog"].map((text) => (
+                <ListItemButton key={text} onClick={toggleDrawer(false)} sx={{'&:hover':{color: " #29b6f6", backgroundColor: "background.default"}}}>
+                    <ListItemText primary={text} slotProps={{primary: {fontWeight: "bold"}}} />
+                </ListItemButton>
+            ))}
+        </List>
+        <hr style={{width: "100%", color: "grey"}} />
+        <Stack direction={"row-reverse"} spacing={3}>
+            <Button sx={{textTransform: "none", display: "in-block",color: "text.primary", backgroundColor: "#E0E0E0",'&:hover':{backgroundColor: " #29b6f6", color:"text.secondary"}, 
+                        borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}>
+                            Log in
+            </Button>
+            <Button sx={{textTransform: "none", display: "in-block",color: "text.secondary", backgroundColor: " #29b6f6", 
+            borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}>
+                Free Trial
+            </Button>  
+        </Stack>
+        </Paper>
+        </Collapse>
+
+        </>
     )
 }
 
