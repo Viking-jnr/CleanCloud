@@ -6,6 +6,11 @@ import testimonials1 from "../../../assets/Images/testimonials_hero_img.png"
 import laundromat from "../../../assets/Images/laundromat_hero_image_spin.webp"
 import alterations from "../../../assets/Images/alterations_hero_image.jpg"
 import shoeCleaning from "../../../assets/Images/shoe-cleaning.jpg"
+import logo_morellis from "../../../assets/Images/logo_morellis.png"
+import logo_jeeves from "../../../assets/Images/logo_jeeves.svg"
+import logo_al_jabr from "../../../assets/Images/logo_al_jabr.svg"
+import logo_giralda from "../../../assets/Images/logo_giralda.png"
+import logo_eastern_dry_cleaners from "../../../assets/Images/logo_eastern_dry_cleaners.svg"
 
 
 const Styles ={
@@ -33,7 +38,8 @@ const Styles ={
         backgroundColor: "#0F1A30",
         display: "flex",
         justifyContent: "space-between",
-    }
+    },
+  
 }
 
 //Dry Cleaning Problems
@@ -73,8 +79,31 @@ const Home = () =>{
     const handleTabChange = (e, newTab) => {
         setActiveTab(newTab);
     }
+
+    {/*Reusable underline component for links with animated underline effect*/}
+    const AnimatedUnderline = ({href, children}) => (
+        <Link 
+        href= {href}
+        underline="none"
+        sx={{position: "relative", display:"inline-block", textDecoration: "none", color:"text.secondary", fontWeight: "bold", cursor: "pointer",
+                    '&::after':{
+                        content: '""',
+                        position:"absolute",
+                        left: 0, bottom:0,
+                        width: "0", height: "4px",
+                        backgroundColor: "#29b6f6",
+                        transition: 'width 0.5s ease-in-out'
+
+                    },
+                    "&:hover::after":{
+                        width: "30%"
+                    }
+                    }}>
+                    {children}
+        </Link>
+    )
     return(
-        <Box sx={{display:"flex", flexDirection: "column", gap:"20px"}}>
+        <Box sx={{display:"flex", flexDirection: "column", gap:"50px"}}>
         <Box sx={{display:"flex", padding: 20, alignItems: "center", flexDirection: isTablet ? "column": "row", gap:"20px"}}>
             <Box sx={{width:isTablet ? "100%": "40%"}}>
                 <Typography variant="h2" sx={{color: "text.primary"}}><span style={{color: "#29b6f6"}}>Point of Sale</span> for Laundromats & Dry Cleaners</Typography><br /><br />
@@ -100,7 +129,7 @@ const Home = () =>{
 
             </Box>
             <Box sx={{width:isTablet ? "100%":"60%"}}>
-            <img src={TabletImg} alt="Graphic Tablet" style={{ width:"100%" }} />
+            <img src={TabletImg} alt="Graphic Tablet" style={{ height: isTablet ? "600px": "auto",width: isTablet ? "auto": "100%" }} />
             </Box>
         </Box>
         <Box sx={{backgroundColor: "#E0E0E0", p: 4, width:"100%", justifyContent: "center", alignItems: "center"}}>
@@ -320,6 +349,49 @@ const Home = () =>{
                 </Box>
             </Box>
         )}
+        <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", gap: "20px",width: "100%"}}>
+            <Typography variant="h3">Used by the best</Typography>
+            <Box display={"flex"} gap={10} >
+                <img src={logo_morellis} style={{height:"70px", width: "200px"}} />
+                <img src={logo_jeeves} style={{height:"100px", width: "120px"}} />
+                <img src={logo_al_jabr} style={{height:"100px", width: "200px"}} />
+                <img src={logo_giralda} style={{height:"100px", width: "150px"}} />
+                <img src={logo_eastern_dry_cleaners} style={{height:"100px", width: "150px"}} />
+            </Box>
+            <Link sx={{position: "relative", display:"inline-block", textDecoration: "none", color:"text.primary", fontWeight: "bold", cursor: "pointer",
+                    '&::after':{
+                        content: '""',
+                        position:"absolute",
+                        left: 0, bottom:0,
+                        width: "0", height: "4px",
+                        backgroundColor: "#29b6f6",
+                        transition: 'width 0.5s ease-in-out'
+
+                    },
+                    "&:hover::after":{
+                        width: "90%"
+                    }
+                    }}>
+                    See all customer stories   →
+                    </Link>
+        </Box>
+        <Box sx={{display: "flex", flexDirection: isTablet ? "column":"row", gap: "20px"}}>
+            <Box pl={20} pr={0} py={7} sx={{width: "40%"}}>
+                <Typography top={0} left={0}>POS</Typography>
+                <Typography variant="h2" >Ultimate Point of Sale </Typography>
+                <Typography variant="body3">Fully featured, powerful and easy to use POS software. For PC, Mac, iOS & Android.</Typography>
+                <List>
+                        {ShoeCleaning.map((text, index) => (
+                            <ListItem key={index}>
+                                <ListItemIcon>
+                                    <CheckCircle sx={{color: "#29b6f6"}} />
+                                </ListItemIcon>
+                                <ListItemText primary={text} slotProps={{primary: {color:"text.secondary"}}} />
+                            </ListItem>
+                        ))}
+                    </List>
+            </Box>
+        </Box>
 
 
 

@@ -144,19 +144,21 @@ const Header = () => {
                             </Paper>
                             </Popper>
                         </Box>
-                        <NavButton>Multi-Store</NavButton>
-                        <NavButton>Testimonials</NavButton>
-                        <NavButton>Pricing</NavButton>
-                        <NavButton>Grow Your Business</NavButton>
-                        <NavButton>Blog</NavButton>
+                        <NavButton onClick={() => navigate('/multi-store')}>Multi-Store</NavButton>
+                        <NavButton onClick={() => navigate('/testimonials')}>Testimonials</NavButton>
+                        <NavButton onClick={() => navigate('/pricing')}>Pricing</NavButton>
+                        <NavButton onClick={() => navigate('/grow-your-business')}>Grow Your Business</NavButton>
+                        <NavButton onClick={() => navigate('/blog')}>Blog</NavButton>
                     </Box>
                     <Box sx={{display: "flex",gap: "10px"}}>
                         <Button sx={{textTransform: "none", display: "in-block",color: "black", backgroundColor: "#E0E0E0", 
-                        borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}>
+                        borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}
+                        onClick={() => navigate('/log-in')}>
                             Log in
                         </Button>
                         <Button sx={{textTransform: "none", display: "in-block",color: "white", backgroundColor: " #29b6f6", 
-                        borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}>
+                        borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}
+                        onClick={() => navigate('/free-trial')}>
                             Free Trial
                         </Button>
                     </Box>
@@ -169,7 +171,7 @@ const Header = () => {
         {/*Navigating the drawer for mobile*/}
         <Collapse in={openDrawer}>
         <Paper  elevation={5} 
-        sx={{zIndex: 900, top: "50px", py: 2, px: 2, width: "100%", display: {lg: "none"}, position: "absolute" }}>
+        sx={{zIndex: 900, top: "50px", py: 2, px: 2, width: "100%", display: {lg: "none"}, position: "fixed" }}>
         <List>
             <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} onMouseEnter={toggleFeatures(true)} 
             sx={{'&:hover':{color: " #29b6f6", backgroundColor: "background.default"}}} >
