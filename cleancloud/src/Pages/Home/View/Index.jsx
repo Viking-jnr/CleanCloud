@@ -11,6 +11,7 @@ import logo_jeeves from "../../../assets/Images/logo_jeeves.svg"
 import logo_al_jabr from "../../../assets/Images/logo_al_jabr.svg"
 import logo_giralda from "../../../assets/Images/logo_giralda.png"
 import logo_eastern_dry_cleaners from "../../../assets/Images/logo_eastern_dry_cleaners.svg"
+import ultimate_pos from "../../../assets/Images/ultimate_pos.jpg"
 
 
 const Styles ={
@@ -69,6 +70,13 @@ const ShoeCleaning = [
     "checkCustomer CRM & notifications",
     "checkStaff management & tracking",
     "checkAdvanced reporting & insights"
+]
+//Ultimate Point of Sale list
+const pos = [
+    "SMS, Email & Push Notifications",
+    "checkReceipt Printer, Tag Printer & Heat Seal support",
+    "checkPayments & Barcode Scanner support",
+    "checkAssisted and Auto Assembly support"
 ]
 
 const Home = () =>{
@@ -376,20 +384,24 @@ const Home = () =>{
                     </Link>
         </Box>
         <Box sx={{display: "flex", flexDirection: isTablet ? "column":"row", gap: "20px"}}>
-            <Box pl={20} pr={0} py={7} sx={{width: "40%"}}>
+            <Box pl={20} pr={0} py={7} sx={{width: isTablet ? "100%": "40%"}}>
                 <Typography top={0} left={0}>POS</Typography>
                 <Typography variant="h2" >Ultimate Point of Sale </Typography>
                 <Typography variant="body3">Fully featured, powerful and easy to use POS software. For PC, Mac, iOS & Android.</Typography>
                 <List>
-                        {ShoeCleaning.map((text, index) => (
+                        {pos.map((text, index) => (
                             <ListItem key={index}>
                                 <ListItemIcon>
                                     <CheckCircle sx={{color: "#29b6f6"}} />
                                 </ListItemIcon>
-                                <ListItemText primary={text} slotProps={{primary: {color:"text.secondary"}}} />
+                                <ListItemText primary={text} slotProps={{primary: {color:"text.primary"}}} />
                             </ListItem>
                         ))}
                     </List>
+                    
+            </Box>
+            <Box sx={{width: isTablet ? "100%": "60%"}}>
+                <img src={ultimate_pos} height={"700px"} width={"100%"} />
             </Box>
         </Box>
 
