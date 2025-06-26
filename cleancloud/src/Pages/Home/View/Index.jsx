@@ -398,7 +398,7 @@ const Home = () =>{
                             </ListItem>
                         ))}
                     </List>
-                    
+                    <AnimatedUnderline href={"/features"} children={"Find out more about the product   →"} />
             </Box>
             <Box sx={{width: isTablet ? "100%": "60%"}}>
                 <img src={ultimate_pos} height={"700px"} width={"100%"} />
