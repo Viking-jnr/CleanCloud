@@ -172,13 +172,20 @@ const Home = () =>{
         </Box>
         {/*Business Types Tabs*/}
         <Box >
-            <Tabs value={activeTab}  variant="scrollable" onChange={handleTabChange} aria-label="Business Tabs" sx={{justifySelf: "center"}}>
+            <Tabs value={activeTab}  variant="scrollable" onChange={handleTabChange} aria-label="Business Tabs"
+                 sx={{justifySelf: "center", '& .MuiTabs-indicator':{display: 'none'}}} textColor="inherit">
                 <Tab label= "Dry Cleaning" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===0 ? "text.otherSecondary": "background.default", color: activeTab===0 ? "text.secondary":"text.primary"}}/>
+                sx={{...Styles.tabs, backgroundColor: activeTab===0 ? "text.otherSecondary": "background.default", color: activeTab===0 ? "text.secondary":"text.primary",
+                     borderRadius: '30px'}}/>
                 <Tab label= "Laundromart" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===1 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary"}} />
-                <Tab label= "Alterations" sx={Styles.tabs}/>
-                <Tab label = "Shoe Cleaning" sx={Styles.tabs}/>
+                sx={{...Styles.tabs, backgroundColor: activeTab===1 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
+                     borderRadius: '30px'}} />
+                <Tab label= "Alterations" 
+                sx={{...Styles.tabs, backgroundColor: activeTab===2 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
+                     borderRadius: '30px'}} />
+                <Tab label = "Shoe Cleaning" 
+                sx={{...Styles.tabs, backgroundColor: activeTab===3 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
+                     borderRadius: '30px'}} />
             </Tabs>
         </Box>
 
