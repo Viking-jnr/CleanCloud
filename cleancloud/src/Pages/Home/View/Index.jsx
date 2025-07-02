@@ -1,4 +1,6 @@
-import { Box, Button, Card, CardContent, CardMedia, Link, List, ListItem, ListItemIcon, ListItemText, Stack, Tab, Tabs, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { Box, Button, Link, List, ListItem, ListItemIcon, ListItemText,
+    Stack, Tab, Tabs, Typography, useMediaQuery, useTheme }
+     from "@mui/material"
 import TabletImg from "../../../assets/Images/hero_graphic_tablet.webp"
 import { CheckCircle, PlayArrow, PlayCircle, Star } from "@mui/icons-material"
 import { useState } from "react"
@@ -17,7 +19,6 @@ import metrics_ipad from "../../../assets/Images/metrics_ipad.png"
 import international_map from "../../../assets/Images/international_map_img.png"
 import Ready from "../../../Components/Ready"
 import Support from "../../../Components/Support"
-import { fontSize } from "@mui/system"
 
 //Styled Components
 const Styles ={
