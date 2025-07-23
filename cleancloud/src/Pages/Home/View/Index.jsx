@@ -19,6 +19,10 @@ import metrics_ipad from "../../../assets/Images/metrics_ipad.png"
 import international_map from "../../../assets/Images/international_map_img.png"
 import Ready from "../../../Components/Ready"
 import Support from "../../../Components/Support"
+import logo_epson from "../../../assets/Images/logo_epson.svg"
+import logo_star from "../../../assets/Images/logo_star.svg"
+import logo_zebra from "../../../assets/Images/logo_zebra.svg"
+import logo_tsc from "../../../assets/Images/logo_tsc.svg"
 
 //Styled Components
 const Styles ={
@@ -181,10 +185,10 @@ const Home = () =>{
                 sx={{...Styles.tabs, backgroundColor: activeTab===1 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
                      borderRadius: '30px'}} />
                 <Tab label= "Alterations" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===2 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
+                sx={{...Styles.tabs, backgroundColor: activeTab===2 ? "text.otherSecondary": "background.default", color: activeTab===2 ? "text.secondary":"text.primary",
                      borderRadius: '30px'}} />
                 <Tab label = "Shoe Cleaning" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===3 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
+                sx={{...Styles.tabs, backgroundColor: activeTab===3 ? "text.otherSecondary": "background.default", color: activeTab===3 ? "text.secondary":"text.primary",
                      borderRadius: '30px'}} />
             </Tabs>
         </Box>
@@ -444,8 +448,14 @@ const Home = () =>{
             </Box>
         </Box>
         {/*Integrated with the best*/}
-        <Box sx={{alignItems:"center", alignSelf: "center"}}>
+        <Box sx={{alignItems:"center", justifyContent: "center", display: 'flex', flexDirection: 'column'}}>
             <Typography variant="h3" sx={{fontWeight: "bold"}}>Integrated with the best</Typography>
+            <Stack direction = 'row' spacing={15}>
+                <img src={logo_epson} alt ="Epson Logo" />
+                <img src={logo_star} alt ="Star Logo" />
+                <img src={logo_zebra} alt ="Zebra Logo" />
+                <img src={logo_tsc} alt ="TSC Logo" />
+            </Stack>
         </Box>
         
 

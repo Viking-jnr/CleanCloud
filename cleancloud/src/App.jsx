@@ -1,9 +1,35 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import HomePage from "./Pages/Home/View/Index"
 import MultiStorePage from './Pages/Multi-StorePage/View/Index'
+import Features from './Pages/Features/View/Index'
+import Pricing from './Pages/Pricing/View/Index'
+import Login from './Pages/Log-In/View/Index'
+
+//App content function to display header and footer only when one is logged in
+function AppContent (){
+  const location = useLocation();
+  const hideHeaderFooter = location.pathname === '/log-in';
+
+  return(
+    <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
+          {!hideHeaderFooter && <Header /> }
+          <main style={{flexGrow: 1}}>
+            <Routes>
+              <Route path="/" element= {<HomePage />} />
+              <Route path='/log-in' element={<Login />} />
+              <Route path='/multi-store' element= {<MultiStorePage />} />
+              <Route path='/features' element={<Features />} />
+              <Route path='pricing' element={<Pricing />} />
+            </Routes>
+          </main>
+
+          {!hideHeaderFooter && <Footer />}
+        </div>
+  )
+}
 
 function App() {
   const theme= createTheme({
@@ -26,23 +52,15 @@ function App() {
     typography:{
         fontFamily: '"Arial", "Helvetica", "sans-serif"',
       }
-  })
+  });
+
+  
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
-          <Header />
-          <main style={{flexGrow: 1}}>
-            <Routes>
-              <Route path="/" element= {<HomePage />} />
-              <Route path='/multi-store' element= {<MultiStorePage />} />
-            </Routes>
-          </main>
-
-          <Footer />
-        </div>
+        <AppContent />
       </BrowserRouter>
     </ThemeProvider>
   )

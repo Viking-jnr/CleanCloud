@@ -1,12 +1,12 @@
 import { AppBar, Box, Button, Container, styled, Toolbar, Popper, Paper, Typography, Grid, useMediaQuery, IconButton, Drawer, 
     List, ListItemButton, ListItemText, Collapse,
     Stack} from "@mui/material"
-import Logo from "../assets/Images/CleanCloudLogo.svg"
+import Logo from "../assets/Images/Logo-Photoroom.png"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { useState } from 'react'
 import { useTheme } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
-import { ArrowDropUp, Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowDropUp, ArrowForward, Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
 
 
 
@@ -75,6 +75,10 @@ const Header = () => {
         }
     }
 
+    //Hover feature for the drop down menu in the feature
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [hovered, setHovered] = useState(null);
+
     
     return(
         <>
@@ -85,7 +89,7 @@ const Header = () => {
                     paddingRight: { xs: "0", sm: "10px", md: "50px", xl: "200px"}, gap: "10px"}}>
                 {/* Box for the logo */}
                         <Box sx={{width: "30%", marginLeft:"10px"}}>
-                            <img src={Logo} alt="CleanCloud" onClick={() => navigate("/")} />
+                            <img src={Logo} alt="CleanCloud" onClick={() => navigate("/")} style={{height: '100px'}} />
                         </Box>
                 {/* Display menu icon for medium screens and below*/}
                     {isTablet && (
@@ -100,6 +104,7 @@ const Header = () => {
             {/* Box for the Navigation buttons in the header
                 They are not shown in medium screens and below*/}
                 {!isTablet && (
+    
                     <Box sx={{display: "flex", flexDirection: "row", gap: "30px"}}>
                     <Box sx={{ gap: "10px", display: "flex",flexDirection: "row"}}>
                     {/* Box for Feature and the Drop Down Menu */}
@@ -117,15 +122,23 @@ const Header = () => {
                             anchorEl={anchorEl}
                             placement= "bottom-start"
                             disablePortal>
-                            <Paper elevation={5} sx={{ p: 2, display: "flex", flexDirection: "row" , width: "1000px", maxHeight: "80vh"}}>
+                            <Paper elevation={5} sx={{ p: 2, display: "flex", flexDirection: "row" , width: "1000px", maxHeight: "90vh"}}>
                             {/*Items on the left*/}
                                 <Grid container spacing={2} sx={{ p: 2,display:"flex", flexDirection:"column"}}>
                                 {Features1.map((item, index)=> (
                                     <Grid item xs={6} key={index}  >
-                                        <Box sx={{p: 1, "&:hover":{backgroundColor:"#E0E0E0", boxShadow: 1, transition: "0.5s"}, cursor: "pointer"}}>
+                                        <Link to={`/features`} style={{textDecoration: 'none',color: 'inherit'}}>
+                                        <Box onMouseEnter= {() => setHoveredIndex(index)}
+                                             onMouseLeave= {() => setHoveredIndex(null)}
+                                             sx={{p: 1, "&:hover":{backgroundColor:"#E0E0E0", boxShadow: 1, transition: "0.8s"}, cursor: "pointer",
+                                             display: "flex", justifyContent: "space-between"}}>
+                                        <Box >
                                             <Typography sx={Styles.title}> {item.title} </Typography>
                                             <Typography sx={Styles.text}> {item.text} </Typography>
                                         </Box>
+                                        { hoveredIndex=== index && (<ArrowForward sx={{color: 'text.otherSecondary'}} />)}
+                                        </Box>
+                                        </Link>
                                     </Grid>
                                 ))}
                                 </Grid>
@@ -133,11 +146,18 @@ const Header = () => {
                                 <Grid container spacing={2} sx={{ p: 2,display:"flex", flexDirection:"column"}}>
                                 {Features2.map((item, index)=> (
                                     <Grid item xs={6} key={index}  >
-                                        <Box sx={{ padding:"5px", justifyContent: "space-between",
-                                         "&:hover":{backgroundColor:"#E0E0E0", boxShadow: 1, transition: "0.5s"}, cursor: "pointer"}}>
+                                        <Link to={`/features`} style={{textDecoration: 'none',color: 'inherit'}}>
+                                        <Box onMouseEnter= {() => setHovered(index)}
+                                             onMouseLeave= {() => setHovered(null)}
+                                             sx={{p: 1, "&:hover":{backgroundColor:"#E0E0E0", boxShadow: 1, transition: "0.8s"}, cursor: "pointer",
+                                             display: "flex", justifyContent: "space-between"}}>
+                                        <Box >
                                             <Typography sx={Styles.title}> {item.title} </Typography>
                                             <Typography sx={Styles.text}> {item.text} </Typography>
                                         </Box>
+                                        { hovered=== index && (<ArrowForward sx={{color: 'text.otherSecondary'}} />)}
+                                        </Box>
+                                        </Link>
                                     </Grid>
                                 ))}
                                 </Grid>
