@@ -140,7 +140,7 @@ const Home = () =>{
 
 
     return(
-        <Box sx={{display:"flex", flexDirection: "column", gap:"50px"}}>
+        <Box sx={{display:"flex", flexDirection: "column", gap:"50px", maxWidth: '100vw'}}>
         <Box sx={{display:"flex", padding: 20, alignItems: "center", flexDirection: isTablet ? "column": "row", gap:"20px"}}>
             <Box sx={{width:isTablet ? "100%": "40%"}}>
                 <Typography variant="h2" sx={{color: "text.primary"}}><span style={{color: "#29b6f6"}}>Point of Sale</span> for Laundromats & Dry Cleaners</Typography><br /><br />

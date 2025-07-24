@@ -223,7 +223,8 @@ const Header = () => {
         <hr style={{width: "100%", color: "grey"}} />
         <Stack direction={"row-reverse"} spacing={3}>
             <Button sx={{textTransform: "none", display: "in-block",color: "text.primary", backgroundColor: "#E0E0E0",'&:hover':{backgroundColor: " #29b6f6", color:"text.secondary"}, 
-                        borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}>
+                        borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}
+                        onClick={() => navigate('/log-in')}>
                             Log in
             </Button>
             <Button sx={{textTransform: "none", display: "in-block",color: "text.secondary", backgroundColor: " #29b6f6", 

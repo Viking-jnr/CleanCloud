@@ -7,11 +7,13 @@ import MultiStorePage from './Pages/Multi-StorePage/View/Index'
 import Features from './Pages/Features/View/Index'
 import Pricing from './Pages/Pricing/View/Index'
 import Login from './Pages/Log-In/View/Index'
+import SignUp from './Pages/Log-In/Sign-up'
 
 //App content function to display header and footer only when one is logged in
 function AppContent (){
   const location = useLocation();
-  const hideHeaderFooter = location.pathname === '/log-in';
+  const hideHeaderFooter = location.pathname === '/log-in'|| location.pathname=== "/sign-up";
+  const hideFooter = location.pathname === '/log-in'
 
   return(
     <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
@@ -23,35 +25,45 @@ function AppContent (){
               <Route path='/multi-store' element= {<MultiStorePage />} />
               <Route path='/features' element={<Features />} />
               <Route path='pricing' element={<Pricing />} />
+              <Route path='/sign-up' element={<SignUp />} />
             </Routes>
           </main>
 
-          {!hideHeaderFooter && <Footer />}
+          {(!hideHeaderFooter || !hideFooter) && <Footer />}
         </div>
   )
 }
 
 function App() {
-  const theme= createTheme({
+  const theme = createTheme({
     palette: {
       mode: "light",
-      text:{
+      text: {
         primary: "#353839", //black default color for text
         secondary: "#F8F8F8",//white secondary color for text
         otherPrimary: "grey",
         otherSecondary: "#29b6f6"
       },
-      background:{
-        default: "white", 
+      background: {
+        default: "white",
         paper: "white",
         other: "#0F1A30",//Dark blue background for some other components
+        button: "#29b6f6",//Light blue for some buttons
         footer: "#eeeeee"//Dark Grey footer background
       },
-      
     },
-    typography:{
-        fontFamily: '"Arial", "Helvetica", "sans-serif"',
+    breakpoints: {
+      values: {
+        xs: 0,      // mobile
+        sm: 600,    // tablets
+        md: 900,    // small laptops
+        lg: 1200,   // desktops
+        xl: 1536    // large screens
       }
+    },
+    typography: {
+      fontFamily: '"Arial", "Helvetica", "sans-serif"',
+    }
   });
 
   
