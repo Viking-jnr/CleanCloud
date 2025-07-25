@@ -16,7 +16,7 @@ exports.signup = async (req, res) => {
         const companyID = companyResult.rows[0].id;
 
         await db.query(
-            `INSERT INTO users (name, phone, email, password, company_id) VALUES ($1, $2, $3, $4. $5)`,
+            `INSERT INTO users (name, phone, email, password, company_id) VALUES ($1, $2, $3, $4, $5)`,
             [user.name, user.phoneNumber, user.email, hashedPassword, companyID]
         );
         res.status(200).json({ message: "Sign up Successful"});

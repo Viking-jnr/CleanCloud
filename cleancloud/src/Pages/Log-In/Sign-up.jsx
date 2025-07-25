@@ -5,6 +5,7 @@ import { useState } from "react";
 import Countries from "../../data.json";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import axios from 'axios';
 
 //Styled Components
 const Styles = {
@@ -52,6 +53,28 @@ const SignUp = () => {
         }));
     }
 
+    const handleSignUp = async () => {
+        try{
+            const response = await axios.post(
+                "https://cleancloud.onrender.com/auth/signup",
+            {
+                company: companyDetails, 
+                user: userDetails
+            },{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        console.log("Sign up successful:", response.data);
+        navigate("/log-in");
+
+        }catch (err) {
+            console.error("Sign up failed:", err.response?.data || err.message);
+        }
+    }
+
 
     return(
         <Box sx={{display: "flex", flexDirection: "column", maxWidth: '100vw'}}>
@@ -92,7 +115,7 @@ const SignUp = () => {
                 </Select>
                 <Typography variant="h5" fontWeight={'bold'} gutterBottom>Your Details</Typography>
                 <InputLabel sx={Styles.input}  >Your Name</InputLabel>
-                <TextField type="text" name="name" value={userDetails.name} fullWidth onChange={handleUserChange} />
+                <TextField type="text" name="name" required value={userDetails.name} fullWidth onChange={handleUserChange} />
                 <InputLabel sx={Styles.input} >Phone Number</InputLabel>
                 <PhoneInput 
                 country={'ke'} value={userDetails.phoneNumber} onChange={(phone) => {setUserDetails(prev => ({
@@ -100,10 +123,12 @@ const SignUp = () => {
                     phoneNumber: phone
                 }))}} enableSearch inputProps={{required : true}} />
                 <InputLabel sx={Styles.input} >Email Address</InputLabel>
-                <TextField type="email" value={userDetails.email} name="email" fullWidth onChange={handleUserChange} />
+                <TextField type="email" required value={userDetails.email} name="email" fullWidth onChange={handleUserChange} />
                 <InputLabel sx={Styles.input} >Password</InputLabel>
-                <TextField type="password" value={userDetails.password} name="password" fullWidth onChange={handleUserChange} />
-                <Button size="large" variant= "contained">Start Free Trial Now</Button>
+                <TextField type="password" required value={userDetails.password} name="password" fullWidth onChange={handleUserChange} />
+                <Button size="large" variant= "contained" onClick={handleSignUp}>
+                    Start Free Trial Now
+                </Button>
             </Paper>
         </Container>
 
