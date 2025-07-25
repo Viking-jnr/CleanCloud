@@ -23,7 +23,8 @@ const NavButton = styled(Button)({
 const Header = () => {
     const theme= useTheme();
     const navigate= useNavigate();
-    const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
+    const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     {/*Anchor element for drop down menu*/}
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -83,16 +84,16 @@ const Header = () => {
     return(
         <>
         <AppBar position="static" 
-        sx={{backgroundColor: "background.default", position: " fixed", zIndex: 1000}}>
+        sx={{backgroundColor: "background.default", position: " fixed", zIndex: 1000, width: '100vw', height: 'auto'}}>
             <Container maxWidth="xl">
-                <Toolbar sx={{display:"flex", flexDirection: "row",paddingLeft: { xs: "0", sm: "10px", md: "50px", xl: "0"},
-                    paddingRight: { xs: "0", sm: "10px", md: "50px", xl: "200px"}, gap: "10px"}}>
+                <Toolbar sx={{display:"flex", flexDirection: "row",paddingLeft: { xs: "0", sm: "10px", md: "10px", xl: "0"},
+                    paddingRight: { xs: "0", sm: "10px", md: "30px", xl: "200px"}, gap: "10px"}}>
                 {/* Box for the logo */}
-                        <Box sx={{width: "30%", marginLeft:"10px"}}>
-                            <img src={Logo} alt="CleanCloud" onClick={() => navigate("/")} style={{height: '100px'}} />
+                        <Box sx={{width: { xs: '50%', sm: '30%', md: '20%' } , ml: { xs: '0', sm: '10px', md: '50px', xl: '0' }}}>
+                            <img src={Logo} alt="CleanCloud" onClick={() => navigate("/")} style={{height: isMobile ? '70px': '100px', maxWidth: '100%', cursor: 'pointer'}} />
                         </Box>
                 {/* Display menu icon for medium screens and below*/}
-                    {isTablet && (
+                    {(isTablet || isMobile) && (
                         <>
                         <Box sx={{ flex: 1}}></Box>
                         <IconButton edge="end" size="large" color="black" onClick={() => setOpenDrawer(!openDrawer)}>
@@ -103,9 +104,9 @@ const Header = () => {
 
             {/* Box for the Navigation buttons in the header
                 They are not shown in medium screens and below*/}
-                {!isTablet && (
+                {(!isTablet && !isMobile) && (
     
-                    <Box sx={{display: "flex", flexDirection: "row", gap: "30px"}}>
+                    <Box sx={{display: "flex", flexDirection: "row", gap: "20px", ml: 0}}>
                     <Box sx={{ gap: "10px", display: "flex",flexDirection: "row"}}>
                     {/* Box for Feature and the Drop Down Menu */}
                         <Box onMouseEnter={handleMenuOpen} onMouseLeave= {handleMenuClose}
@@ -191,10 +192,12 @@ const Header = () => {
         {/*Navigating the drawer for mobile*/}
         <Collapse in={openDrawer}>
         <Paper  elevation={5} 
-        sx={{zIndex: 900, top: "50px", py: 2, px: 2, width: "100%", display: {lg: "none"}, position: "fixed" }}>
+        sx={{zIndex: 900, top: {xs: '50px', md: '70px'}, py: 2, px: 2, width: "100vw", 
+             left: 0, display: {lg: "none"}, position: "fixed" }}>
         <List>
             <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} onMouseEnter={toggleFeatures(true)} 
-            sx={{'&:hover':{color: " #29b6f6", backgroundColor: "background.default"}}} >
+            sx={{'&:hover':{color: " #29b6f6", backgroundColor: "background.default"},
+            fontSize: {xs: 18, sm: 16} }} >
                 <ListItemText primary="Features" slotProps={{primary: {fontWeight: "bold"}}} />
                 <IconButton edge="end">
                     {openFeatures ? <ArrowDropUp sx={{color: " #29b6f6"}}/> : <ArrowDropDownIcon sx={{color: " #29b6f6"}}/>}

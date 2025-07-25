@@ -140,13 +140,15 @@ const Home = () =>{
 
 
     return(
-        <Box sx={{display:"flex", flexDirection: "column", gap:"50px", maxWidth: '100vw'}}>
-        <Box sx={{display:"flex", padding: 20, alignItems: "center", flexDirection: isTablet ? "column": "row", gap:"20px"}}>
-            <Box sx={{width:isTablet ? "100%": "40%"}}>
-                <Typography variant="h2" sx={{color: "text.primary"}}><span style={{color: "#29b6f6"}}>Point of Sale</span> for Laundromats & Dry Cleaners</Typography><br /><br />
+        <Box sx={{display:"flex", flexDirection: "column", gap: {xs: "30px", md: "50px"}, 
+        maxWidth: '100vw' }}>
+        <Box sx={{display:"flex", alignItems: "center", flexDirection:{xs: 'column', lg: 'row'}, gap:"20px",
+                p: {xs: 2, md: 10} , mt: {xs: 10, lg: '5'} }}>
+            <Box sx={{width: {xs: '100%', lg: '40%'} }}>
+                <Typography variant={isTablet ? "h3" : "h2"} sx={{color: "text.primary"}}><span style={{color: "#29b6f6"}}>Point of Sale</span> for Laundromats & Dry Cleaners</Typography><br /><br />
                 <hr style={{width: "50px", color: "grey", float: "left"}} /><br />
                 <Typography variant="h5" color="text.primary">The All-in-one solution for Point of Sale, Pickup and Delivery Apps and more.</Typography>
-                <Stack direction={"row"} spacing={2}>
+                <Stack direction={"row"} spacing={2} mt={2}>
                     <Button sx={Styles.buttons}>
                     Try for free
                     </Button>
@@ -165,40 +167,41 @@ const Home = () =>{
                  
 
             </Box>
-            <Box sx={{width:isTablet ? "100%":"60%"}}>
-            <img src={TabletImg} alt="Graphic Tablet" style={{ height: isTablet ? "600px": "auto",width: isTablet ? "auto": "100%" }} />
+            <Box sx={{ width: { xs: "100%", lg: "60%" }, display: 'flex', justifyContent: 'center', mt: 3 }}>
+            <img src={TabletImg} alt="Graphic Tablet" style={{ height: isTablet ? 300 : "auto",width: "100%", maxWidth: isTablet ? 400 : 'auto', objectFit: 'contain'}} />
             </Box>
         </Box>
 
-
-        <Box sx={{backgroundColor: "#E0E0E0", p: 4, width:"100%", justifyContent: "center", alignItems: "center"}}>
-            <Typography variant="h5" alignItems={"center"} justifySelf={"center"} fontWeight={"bold"}>SELECT YOUR BUSINESS TYPE</Typography>
+        {/*Business Types Selector*/}
+        <Box sx={{backgroundColor: "#E0E0E0", p: {xs: 2, md: 4} , width:"100%",  textAlign: 'center'}}>
+            <Typography variant="h5"  fontWeight={"bold"}>SELECT YOUR BUSINESS TYPE</Typography>
         </Box>
         {/*Business Types Tabs*/}
         <Box >
             <Tabs value={activeTab}  variant="scrollable" onChange={handleTabChange} aria-label="Business Tabs"
-                 sx={{justifySelf: "center", '& .MuiTabs-indicator':{display: 'none'}}} textColor="inherit">
+                 sx={{justifySelf: isTablet ? 'none': 'center', '& .MuiTabs-indicator':{display: 'none'}}} textColor="inherit">
                 <Tab label= "Dry Cleaning" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===0 ? "text.otherSecondary": "background.default", color: activeTab===0 ? "text.secondary":"text.primary",
-                     borderRadius: '30px'}}/>
+                sx={{...Styles.tabs, backgroundColor: activeTab===0 ? "text.otherSecondary": "background.default", color: (activeTab===0) ? "text.secondary":"text.primary",
+                     borderRadius: '30px', minHeight: { xs: 36, md: 50 }}}/>
                 <Tab label= "Laundromart" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===1 ? "text.otherSecondary": "background.default", color: activeTab===1 ? "text.secondary":"text.primary",
-                     borderRadius: '30px'}} />
+                sx={{...Styles.tabs, backgroundColor: activeTab===1 ? "text.otherSecondary": "background.default", color: (activeTab===1 ) ? "text.secondary":"text.primary",
+                     borderRadius: '30px', minHeight: { xs: 36, md: 50 }}} />
                 <Tab label= "Alterations" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===2 ? "text.otherSecondary": "background.default", color: activeTab===2 ? "text.secondary":"text.primary",
-                     borderRadius: '30px'}} />
+                sx={{...Styles.tabs, backgroundColor: activeTab===2 ? "text.otherSecondary": "background.default", color: (activeTab===2)? "text.secondary":"text.primary",
+                     borderRadius: '30px', minHeight: { xs: 36, md: 50 }}} />
                 <Tab label = "Shoe Cleaning" 
-                sx={{...Styles.tabs, backgroundColor: activeTab===3 ? "text.otherSecondary": "background.default", color: activeTab===3 ? "text.secondary":"text.primary",
-                     borderRadius: '30px'}} />
+                sx={{...Styles.tabs, backgroundColor: activeTab===3 ? "text.otherSecondary": "background.default", color: (activeTab===3) ? "text.secondary":"text.primary",
+                     borderRadius: '30px', minHeight: { xs: 36, md: 50 }}} />
             </Tabs>
         </Box>
 
         {/*Dry Cleaning Tab*/}
         {activeTab === 0 &&(
-            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}} >
+            <Box sx={{... Styles.tab, flexDirection: { xs: "column-reverse", lg: "row" }}} >
                 <Box onClick={() => {window.open("https://youtu.be/d2eGNUGcdhs","youtubePopup", "width=700, height=500")} }
-                sx={{cursor: "pointer", width: "70%", position: "relative"}} pl={10} pr={0} py={7}>
-                    <img src={testimonials1} alt="Testimonial" width={"100%"} height={"100%"} style={{objectFit: 'cover'}} /> 
+                sx={{cursor: "pointer", width: { xs: "100%", lg: "70%" }, position: "relative", 
+                    pl: { xs: 0, lg: 10 },pr: 0, py: { xs: 2, lg: 7 } }} >
+                    <img src={testimonials1} alt="Testimonial" width={"100%"} height={"100%"} style={{ objectFit: 'cover', borderRadius: 12 }} /> 
 
                     {/*Overlay Text*/}
                     <Box sx={{position: "absolute", bottom: '20%',left: '20%', alignItems:"center"}}>
@@ -207,7 +210,7 @@ const Home = () =>{
                         <Typography color="text.secondary">Learn how Busy Bee Cleaners grow<br /> their business with CleanCloud.</Typography>
                     </Box>
                 </Box>
-                <Box p={10} sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
+                <Box p={{ xs: 2, lg: 10 }} sx={{display:"flex",flexDirection:"column", gap: { xs: "20px", lg: "50px" }}}>
                     <Typography variant="h2" color="whitesmoke">Solving your Dry Cleaning problems</Typography>
                     <List>
                         {DryCleaning.map((text, index) => (
@@ -220,7 +223,7 @@ const Home = () =>{
                         ))}
                     </List>
                     <Button  sx={{color: "text.secondary", textTransform: "none", display:"flex",flexDirection:"row", border: 2, borderRadius: "30px", 
-                    paddingLeft:"30px", paddingRight: "30px", alignItems: "center", width: "50%"}}
+                    px : 3, alignItems: "center", width: {xs: '100%', sm: "60%", md: '50%'} }}
                     onClick={() => {window.open("https://youtu.be/d2eGNUGcdhs","youtubePopup", "width=700, height=500")} }>
                     <PlayArrow color="text.secondary" fontSize="large"/>
                     <Typography variant="h6">Watch Larry's Story</Typography>
@@ -235,10 +238,11 @@ const Home = () =>{
 
         {/*Laundromat Tab*/}
         {activeTab === 1 && (
-            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}}>
-                <Box sx={{cursor: "pointer", width: "70%", position: "relative"}} pl={10} pr={0} py={7}
+            <Box sx={{... Styles.tab, flexDirection: { xs: "column-reverse", lg: "row" }}}>
+                <Box sx={{cursor: "pointer", width: { xs: "100%", lg: "70%" }, position: "relative",
+                 pl: { xs: 0, lg: 10 },pr: 0, py: { xs: 2, lg: 7 } }}
                 onClick={() => {window.open("https://youtu.be/jYYRLj0MFDg","youtubePopup", "width=700, height=500")} }>
-                    <img src={laundromat} alt="Laundromat Testimonial" style={{borderRadius: "15px"}} />
+                    <img src={laundromat} alt="Laundromat Testimonial" width={"100%"} height={"100%"} style={{ objectFit: 'cover', borderRadius: 12 }} />
                     {/*Overlay Text*/}
                     <Box sx={{position: "absolute", bottom: '10%',left: '15%', alignItems:"center"}}>
                         <PlayCircle fontSize="large" sx={{color:"white"}} /> 
@@ -247,7 +251,7 @@ const Home = () =>{
                     </Box>
                 </Box>
 
-                <Box p={10} sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
+                <Box p={{ xs: 2, lg: 10 }}  sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
                     <Typography variant="h2" color="whitesmoke">Solving all your Laundromat needs</Typography>
                     <List>
                         {Laundromat.map((text, index) => (
@@ -260,7 +264,7 @@ const Home = () =>{
                         ))}
                     </List>
                     <Button  sx={{color: "text.secondary", textTransform: "none", display:"flex",flexDirection:"row", border: 2, borderRadius: "30px", 
-                    paddingLeft:"30px", paddingRight: "30px", alignItems: "center", width: "50%"}}
+                    paddingLeft:"30px", paddingRight: "30px", alignItems: "center", width: {xs: '100%', sm: "60%", md: '50%'}}}
                     onClick={() => {window.open("https://youtu.be/jYYRLj0MFDg","youtubePopup", "width=700, height=500")} }>
                     <PlayArrow color="text.secondary" fontSize="large"/>
                     <Typography variant="h6">Watch Morgan's Story</Typography>
@@ -275,9 +279,10 @@ const Home = () =>{
 
         {/*Alterations Tab*/}
         {activeTab === 2 && (
-            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}}>
-                <Box sx={{ width: "70%", position: "relative"}} pl={10} pr={0} py={7}>
-                <img src={alterations} alt="Alterations" style={{borderRadius: "15px", height: "550px"}}/>
+            <Box sx={{... Styles.tab, flexDirection: { xs: "column-reverse", lg: "row" }}}>
+                <Box sx={{ width: { xs: "100%", lg: "70%" }, position: "relative",
+            pl: { xs: 0, lg: 10 },pr: 0, py: { xs: 2, lg: 7 } }} >
+                <img src={alterations} alt="Alterations" width={"100%"} height={"100%"} style={{ objectFit: 'cover', borderRadius: 12 }}/>
 
                 {/*Overlay Text*/}
                     <Box sx={{position: "absolute", bottom: '20%',left: '15%', alignItems:"center"}}>
@@ -286,7 +291,7 @@ const Home = () =>{
                     </Box>
                 </Box>
 
-                <Box p={10} sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
+                <Box p={{ xs: 2, lg: 10 }}  sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
                     <Typography variant="h2" color="whitesmoke">Solving all your Alteration Problems</Typography>
                     <List>
                         {Alteration.map((text, index) => (
@@ -307,9 +312,10 @@ const Home = () =>{
 
         {/*Shoe Cleaning Tab*/}
         {activeTab === 3 &&(
-            <Box sx={{... Styles.tab, flexDirection: isTablet ? "column-reverse":"row"}}>
-                <Box sx={{ width: "70%", position: "relative"}} pl={10} pr={0} py={7}>
-                <img src={shoeCleaning} alt="Shoe Cleaning" style={{borderRadius: "15px", height: "500px"}}/>
+            <Box sx={{... Styles.tab, flexDirection: { xs: "column-reverse", lg: "row" }}}>
+                <Box sx={{ width: { xs: "100%", lg: "70%" }, position: "relative",
+            pl: { xs: 0, lg: 10 },pr: 0, py: { xs: 2, lg: 7 } }} >
+                <img src={shoeCleaning} alt="Shoe Cleaning" width={"100%"} height={"100%"} style={{ objectFit: 'cover', borderRadius: 12 }}/>
 
                 {/*Overlay Text*/}
                     <Box sx={{position: "absolute", bottom: '20%',left: '15%', alignItems:"center"}}>
@@ -318,7 +324,7 @@ const Home = () =>{
                     </Box>
                 </Box>
 
-                <Box p={10} sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
+                <Box p={{ xs: 2, lg: 10 }}  sx={{display:"flex",flexDirection:"column", gap: "50px"}}>
                     <Typography variant="h2" color="whitesmoke">Solving all your Shoe Cleaning problems</Typography>
                     <List>
                         {ShoeCleaning.map((text, index) => (
@@ -338,9 +344,10 @@ const Home = () =>{
             </Box>
         )}
         {/*Used by the best*/}
-        <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", gap: "20px",width: "100%", justifyContent: "space-between"}}>
+        <Box sx={{display: "flex", flexDirection: "column", alignItems: "center",
+             gap: { xs: "10px", md: "20px" },width: "100%", justifyContent: "space-between"}}>
             <Typography variant="h3">Used by the best</Typography>
-            <Box display={"flex"} gap={10} >
+            <Box display={"flex"} gap={{ xs: 2, md: 10 }} flexWrap={'wrap'} justifyContent={'center'} >
                 <img src={logo_morellis} style={{height:"70px", width: "200px"}} />
                 <img src={logo_jeeves} style={{height:"100px", width: "120px"}} />
                 <img src={logo_al_jabr} style={{height:"100px", width: "200px"}} />
@@ -351,8 +358,8 @@ const Home = () =>{
         </Box>
 
         {/*Ultimate Point of Sale*/}
-        <Box sx={{display: "flex", flexDirection: isTablet ? "column":"row", gap: "20px"}}>
-            <Box pl={20} pr={0} py={7} sx={{width: isTablet ? "100%": "40%", display: "flex", flexDirection: "column", gap: "20px"}}>
+        <Box sx={{display: "flex", flexDirection: {xs: 'column', lg: 'row'}, gap: "20px"}}>
+            <Box pl={{xs: 2, lg: 20}} pr={0} py={7} sx={{width: {xs: '100%', lg: '40%'}, display: "flex", flexDirection: "column", gap: "20px"}}>
                 <Typography top={0} left={0} color="text.otherPrimary">POS</Typography>
                 <Typography variant="h2" >Ultimate Point of Sale </Typography>
                 <Typography variant="body3">Fully featured, powerful and easy to use POS software. For PC, Mac, iOS & Android.</Typography>
@@ -367,21 +374,21 @@ const Home = () =>{
                         ))}
                     </List>
                     <AnimatedUnderline href={"/features"} children={"Find out more about the product   →"} width={"90%"} textColor={"text.primary"} />
-                    <Button sx={{...Styles.buttons, width: "30%"}}>
+                    <Button sx={{...Styles.buttons, width:{xs: '90%', lg: '30%'} }}>
                     Try for free
                     </Button>
             </Box>
-            <Box sx={{width: isTablet ? "100%": "60%"}}>
-                <img src={ultimate_pos} height={"700px"} width={"100%"} />
+            <Box sx={{ width:{xs: '100%', lg: '50%'} }}>
+                <img src={ultimate_pos}  style={{height: '100%', width: '100%' }} />
             </Box>
         </Box>
         {/*Pickup and delivery services*/}
-        <Box sx={{display: "flex", flexDirection: isTablet ? "column-reverse":"row"}}>
-            <Box pl={20} pr={0} py={7}  sx={{width: isTablet ? "100%": "40%"}}>
+        <Box sx={{display: "flex", flexDirection: {xs: "column-reverse", lg: "row"} }}>
+            <Box pl={{xs: 2, lg: 20}} pr={0} py={7}  sx={{width: isTablet ? "100%": "40%"}}>
                 <img src={pickup_and_delivery} height={"500px"} width={"100%"} />
             </Box>
 
-            <Box pl={20} pr={0} py={7} sx={{width: isTablet ? "100%": "40%", display: "flex", flexDirection: "column", gap: "20px"}}>
+            <Box pl={{xs: 2, lg: 20}} pr={0} py={7} sx={{width: isTablet ? "100%": "40%", display: "flex", flexDirection: "column", gap: "20px"}}>
                 <Typography top={0} left={0} color="text.otherPrimary">REACH YOUR CUSTOMERS</Typography>
                 <Typography variant="h2" >Pickup and Delivery Services </Typography>
                 <Typography variant="body3">Launch an advanced app & website powered pickup and delivery service overnight.</Typography>
@@ -401,7 +408,7 @@ const Home = () =>{
 
         {/*Growing Business*/}
         <Box sx={{display: "flex", flexDirection: isTablet ? "column":"row", gap: "20px"}}>
-            <Box pl={20} pr={0} py={7} sx={{width: isTablet ? "100%": "50%", display: "flex", flexDirection: "column", gap: "20px"}}>
+            <Box pl={{xs: 2, lg: 20}} pr={0} py={7} sx={{width: isTablet ? "100%": "50%", display: "flex", flexDirection: "column", gap: "20px"}}>
                 <Typography top={0} left={0} color="text.otherPrimary">GROW YOUR BUSINESS</Typography>
                 <Typography variant="h2" >Proven to help grow your business </Typography>
                 <List>
@@ -416,14 +423,14 @@ const Home = () =>{
                     </List>
                     <AnimatedUnderline href={"/features"} children={"Find out more about the product   →"} width={"40%"} textColor={"text.primary"} />
             </Box>
-            <Box pl={5} sx={{width: isTablet ? "100%": "50%"}}>
+            <Box pl={{xs: 2, lg: 5}} sx={{width: isTablet ? "100%": "50%"}}>
                 <img src={metrics_ipad} height={"500px"} width={"100%"} />
             </Box>
         </Box>
         {/*Global Presence*/}
         <Box sx={{alignItems: "center", display: "flex", flexDirection: "column", gap: "20px"}}>
             <Typography color="text.otherPrimary">GLOBAL PRESENCE</Typography>
-            <Typography variant="h2">Trusted and loved globally</Typography>
+            <Typography variant={isTablet ? "h3": "h2"} >Trusted and loved globally</Typography>
             <Typography sx={{fontSize: 20}}>Serving thousands of the most innovative laundromats and dry cleaners in over 100 countries.</Typography>
             <img src={international_map} width={isTablet ? "100%":"80%"} height={"600px"} />
         </Box>
@@ -450,7 +457,7 @@ const Home = () =>{
         {/*Integrated with the best*/}
         <Box sx={{alignItems:"center", justifyContent: "center", display: 'flex', flexDirection: 'column'}}>
             <Typography variant="h3" sx={{fontWeight: "bold"}}>Integrated with the best</Typography>
-            <Stack direction = 'row' spacing={15}>
+            <Stack direction = 'row' spacing={15} display={'flex'} flexWrap={'wrap'}>
                 <img src={logo_epson} alt ="Epson Logo" />
                 <img src={logo_star} alt ="Star Logo" />
                 <img src={logo_zebra} alt ="Zebra Logo" />

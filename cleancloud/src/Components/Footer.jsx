@@ -26,11 +26,11 @@ const Styles = {
 
 function Footer(){
     const theme = useTheme();
-    const isTablet = useMediaQuery(theme.breakpoints.down('sm'));
+    const isTablet = useMediaQuery(theme.breakpoints.down('lg'));
 
 return(
-    <footer style={{ backgroundColor: "#eeeeee",paddingTop: "100px"}}>
-        <Box sx={{display: "flex", flexDirection: "column", paddingLeft: { xs: "0", sm: "100px", md: "150px", xl: "200px"},
+    <footer style={{ backgroundColor: "#eeeeee",paddingTop: "100px",maxWidth: '100vw'}}>
+        <Box sx={{display: "flex", flexDirection: "column", paddingLeft: { xs: 0, sm: "100px", md: "150px", xl: "200px"},
          paddingRight: { xs: "0", sm: "100px", md: "150px", xl: "200px"}, gap: "30px"}}>
         {/*The Logo*/}
         <Box>
@@ -44,14 +44,15 @@ return(
             </Box>
              {/*Push the boxes to the right*/}
                 <Box sx={{flex: 1}}></Box>
-            <Box component={Paper} gap={5} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", padding: "15px"}}>
-                <Box gap={2} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", padding: "15px"}}>
-                <Paper sx={{padding: "10px", alignItems: "center", backgroundColor: "#E0E0E0"}}>
-               <Smartphone fontSize="large" sx={{color: " #29b6f6"}} />
-               </Paper>
-               <Typography>CALL US<br />
-              <b>+1 (415) 212 5626</b></Typography>
-               </Box>
+                {/*Contact Card*/}
+            <Box component={Paper} gap={{xs: 2, lg: 5}} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", padding: {xs: '5px',lg: '15px'} }}>
+                    <Box gap={2} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", padding: "15px"}}>
+                        <Paper sx={{padding: "10px", alignItems: "center", backgroundColor: "#E0E0E0"}}>
+                            <Smartphone fontSize="large" sx={{color: " #29b6f6"}} />
+                        </Paper>
+                        <Typography>CALL US<br />
+                        <b>+2547515448454</b></Typography>
+                    </Box>
                <Box gap={2} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", padding: "15px"}}>
                 <Paper sx={{padding: "10px", alignItems: "center", backgroundColor: "#E0E0E0"}}>
                     <Email fontSize="large" sx={{color: " #29b6f6"}} />
@@ -62,7 +63,7 @@ return(
             </Box>
         </Box>
 
-            <Box sx={{display: "flex", flexDirection: "row", gap: "50px"}}>
+            <Box sx={{display: "flex", flexDirection: {xs: 'column', lg: 'row'}, gap: "50px", ml: {xs: 10, lg: 0}}}>
                 {/*CleanCloud*/}
                 <Box sx={Styles.boxes}>
                     <Typography fontWeight={"bold"}>CleanCloud</Typography>
