@@ -7,6 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const authRoutes = require('./routes/authRoutes');
+app.use('/auth', authRoutes);
+
 
 app.get("/", (req, res) => {
     res.send("Welcome to the CleanCloud API!");
