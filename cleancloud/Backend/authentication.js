@@ -46,3 +46,49 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: err.message});
     }
 }
+
+//Password Reset Function
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
+exports.resetPassword = async (req, res) => {
+    const { email} = req.body;
+    try{
+        const userResult = await db.query(
+            `SELECT * FROM users WHERE email = $1`, [email]
+        );
+        const user = userResult.rows[0];
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found!"});
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiry = new Date(Date.now() + 3600000);//expires in 1hr
+
+        await db.query(
+            `INSERT INTO password_resets (email, token, expires_at) VALUES ($1, $2, $3)`,
+            [email, token, expiry]
+        );
+
+        const resetLink = `https://cleancloud.onrender.com/reset-password?token=${token}`;
+        //send email using nodemailer
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Password Reset Request',
+            html: `<p>Click <a href="${resetLink}">here</a> to reset your password. The link is valid for 1 hour.</p>`
+        });
+        res.json({ message: "Password reset link sent to your email!" });
+    }catch (err) {
+        res.status(500).json({error: err.message});
+    }
+}

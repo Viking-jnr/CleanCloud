@@ -1,13 +1,14 @@
 import { AppBar, Box, Button, Container, styled, Toolbar, Popper, Paper, Typography, Grid, useMediaQuery, IconButton, Drawer, 
     List, ListItemButton, ListItemText, Collapse,
     Stack,
-    Avatar} from "@mui/material"
+    Avatar,
+    Divider} from "@mui/material"
 import Logo from "../assets/Images/Logo-Photoroom.png"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { useState } from 'react'
 import { useTheme } from '@mui/material/styles';
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowDropUp, ArrowForward, Close as CloseIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { ArrowDropUp, ArrowForward, Close as CloseIcon, Logout, Menu as MenuIcon } from "@mui/icons-material";
 
 
 
@@ -17,6 +18,7 @@ const NavButton = styled(Button)({
     fontSize: 13,
     color: "black", 
     textTransform: "none",
+    textAlign: 'left',
     "&:hover":{
         color:" #29b6f6"
     }
@@ -87,14 +89,20 @@ const Header = () => {
     //To get the first letter of the email
     const firstLetter = email ? email.charAt(0).toUpperCase() : '';
 
+    //To handle profile drop down menu
+    const [profileMenu, setProfileMenu] = useState(false);
+    const handleProfileMenu = () => {
+        setProfileMenu(!profileMenu);
+    }
+
     
     return(
         <>
         <AppBar position="static" 
         sx={{backgroundColor: "background.default", position: " fixed", zIndex: 1000, width: '100vw', height: 'auto'}}>
             <Container maxWidth="xl">
-                <Toolbar sx={{display:"flex", flexDirection: "row",paddingLeft: { xs: "0", sm: "10px", md: "10px", xl: "0"},
-                    paddingRight: { xs: "0", sm: "10px", md: "30px", xl: "200px"}, gap: "10px"}}>
+                <Toolbar sx={{display:"flex", flexDirection: "row",paddingLeft: { xs: 0, sm: "10px", md: 3,lg: 3, xl: 0},
+                    paddingRight: { xs: "0", sm: "10px", md: "30px", xl: "100px"}, gap: "10px"}}>
                 {/* Box for the logo */}
                         <Box sx={{width: { xs: '50%', sm: '30%', md: '20%' } , ml: { xs: '0', sm: '10px', md: '50px', xl: '0' }}}>
                             <img src={Logo} alt="CleanCloud" onClick={() => navigate("/")} style={{height: isMobile ? '70px': '100px', maxWidth: '100%', cursor: 'pointer'}} />
@@ -178,10 +186,24 @@ const Header = () => {
                         <NavButton onClick={() => navigate('/grow-your-business')}>Grow Your Business</NavButton>
                         <NavButton onClick={() => navigate('/blog')}>Blog</NavButton>
                     </Box>
+                    <Box sx={{flex: 1}} ></Box>
                     <Box sx={{display: "flex",gap: "10px"}}>
                         {/* Conditional rendering based on login status */}
                         {isLoggedIn ? (
-                            <Avatar>{firstLetter} </Avatar>
+                            <div style={{position: 'relative', width: '150px' }} onMouseEnter={handleProfileMenu} onMouseLeave={handleProfileMenu}>
+                            
+                            <Avatar sx={{backgroundColor: 'background.button'}} >
+                                {firstLetter} 
+                            </Avatar>
+                            {/*Profile Menu*/}
+                            {profileMenu && (
+                                <Paper elevation={5} sx={{position: 'absolute', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'left'}}>
+                                    <NavButton>Profile Management</NavButton>
+                                    <Divider />
+                                    <NavButton startIcon={<Logout />} onClick={()=> {localStorage.clear(); navigate('/log-in'); } } >Log out</NavButton>
+                                </Paper>
+                            )}
+                            </div>
                         ): (
                             <>
                             <Button sx={{textTransform: "none", display: "in-block",color: "black", backgroundColor: "#E0E0E0", 
@@ -207,7 +229,7 @@ const Header = () => {
         {/*Navigating the drawer for mobile*/}
         <Collapse in={openDrawer}>
         <Paper  elevation={5} 
-        sx={{zIndex: 900, top: {xs: '50px', md: '100px'}, py: 2, px: 2, width: "100vw", 
+        sx={{zIndex: 900, top: {xs: '50px', md: '100px'}, py: 5, px: 2, width: "100vw", 
              left: 0, display: {lg: "none"}, position: "fixed" }}>
         <List>
             <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} onMouseEnter={toggleFeatures(true)} 
@@ -239,17 +261,28 @@ const Header = () => {
             ))}
         </List>
         <hr style={{width: "100%", color: "grey"}} />
-        <Stack direction={"row-reverse"} spacing={3}>
+        <Stack direction={"row"} spacing={3}>
+            {/* Conditional rendering based on login status */}
+            {isLoggedIn ? (
+                <>
+                
+                <Avatar sx={{backgroundColor: 'background.button'}}>{firstLetter} </Avatar>
+                </>
+            ):(
+            <>
+            <Button sx={{textTransform: "none", display: "in-block",color: "text.secondary", backgroundColor: " #29b6f6", 
+            borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}
+            onClick={() => navigate ('/sign-up')} >
+                Free Trial
+            </Button>
             <Button sx={{textTransform: "none", display: "in-block",color: "text.primary", backgroundColor: "#E0E0E0",'&:hover':{backgroundColor: " #29b6f6", color:"text.secondary"}, 
                         borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}
                         onClick={() => navigate('/log-in')}>
                             Log in
             </Button>
-            <Button sx={{textTransform: "none", display: "in-block",color: "text.secondary", backgroundColor: " #29b6f6", 
-            borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}
-            onClick={() => navigate ('/sign-up')} >
-                Free Trial
-            </Button>  
+             
+            </> 
+                        )}
         </Stack>
         </Paper>
         </Collapse>
