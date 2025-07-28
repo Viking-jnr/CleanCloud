@@ -1,6 +1,7 @@
 import { AppBar, Box, Button, Container, styled, Toolbar, Popper, Paper, Typography, Grid, useMediaQuery, IconButton, Drawer, 
     List, ListItemButton, ListItemText, Collapse,
-    Stack} from "@mui/material"
+    Stack,
+    Avatar} from "@mui/material"
 import Logo from "../assets/Images/Logo-Photoroom.png"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { useState } from 'react'
@@ -79,6 +80,12 @@ const Header = () => {
     //Hover feature for the drop down menu in the feature
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [hovered, setHovered] = useState(null);
+
+    //To check if the user is logged in
+    const isLoggedIn = !!localStorage.getItem('authToken');
+    const email = localStorage.getItem('email');
+    //To get the first letter of the email
+    const firstLetter = email ? email.charAt(0).toUpperCase() : '';
 
     
     return(
@@ -172,16 +179,24 @@ const Header = () => {
                         <NavButton onClick={() => navigate('/blog')}>Blog</NavButton>
                     </Box>
                     <Box sx={{display: "flex",gap: "10px"}}>
-                        <Button sx={{textTransform: "none", display: "in-block",color: "black", backgroundColor: "#E0E0E0", 
+                        {/* Conditional rendering based on login status */}
+                        {isLoggedIn ? (
+                            <Avatar>{firstLetter} </Avatar>
+                        ): (
+                            <>
+                            <Button sx={{textTransform: "none", display: "in-block",color: "black", backgroundColor: "#E0E0E0", 
                         borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}
                         onClick={() => navigate('/log-in')}>
                             Log in
                         </Button>
                         <Button sx={{textTransform: "none", display: "in-block",color: "white", backgroundColor: " #29b6f6", 
                         borderRadius: "20px", paddingLeft: "20px", paddingRight: "20px", fontWeight: "bold"}}
-                        onClick={() => navigate('/free-trial')}>
+                        onClick={() => navigate('/sign-up')}>
                             Free Trial
                         </Button>
+                        </>
+                        )}
+                        
                     </Box>
                     </Box>
                 )}
@@ -192,7 +207,7 @@ const Header = () => {
         {/*Navigating the drawer for mobile*/}
         <Collapse in={openDrawer}>
         <Paper  elevation={5} 
-        sx={{zIndex: 900, top: {xs: '50px', md: '70px'}, py: 2, px: 2, width: "100vw", 
+        sx={{zIndex: 900, top: {xs: '50px', md: '100px'}, py: 2, px: 2, width: "100vw", 
              left: 0, display: {lg: "none"}, position: "fixed" }}>
         <List>
             <ListItemButton onClick={() => setOpenFeatures(!openFeatures)} onMouseEnter={toggleFeatures(true)} 
@@ -231,7 +246,8 @@ const Header = () => {
                             Log in
             </Button>
             <Button sx={{textTransform: "none", display: "in-block",color: "text.secondary", backgroundColor: " #29b6f6", 
-            borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}>
+            borderRadius: "30px", paddingLeft: "30px", paddingRight: "30px", fontWeight: "bold", width:"50%"}}
+            onClick={() => navigate ('/sign-up')} >
                 Free Trial
             </Button>  
         </Stack>

@@ -24,8 +24,10 @@ const Login = () => {
             );
             const token = response.data.token;
             console.log("Logged in successful! JWT:", token);
+            navigate("/");
 
-            localStorage.setItem('authoken', token);
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('email', email);
         }catch (err) {
             console.error("Login Failed!", err);
         }
