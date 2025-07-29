@@ -83,7 +83,7 @@ exports.resetPassword = async (req, res) => {
 
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
-            to: email,
+            to: emailReset,
             subject: 'Password Reset Request',
             html: `<p>Click <a href="${resetLink}">here</a> to reset your password. The link is valid for 1 hour.</p>`
         });
