@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../../../assets/Images/Logo-Photoroom.png"
 import { Box, Button, Collapse, Container, IconButton, InputLabel, Paper, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Check, CheckBox, CheckCircle, EmailOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { CheckBox, EmailOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 
 const Login = () => {
@@ -60,7 +60,7 @@ const Login = () => {
             const response = await axios.post(
                 "https://cleancloud.onrender.com/auth/reset-password",
                 { emailReset },
-                { headers: { "Content-Type": "applocation/json"}  }
+                { headers: { "Content-Type": "application/json"}  }
             );
             console.log(response.data.message);
             setReset(false);

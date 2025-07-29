@@ -52,10 +52,10 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
 exports.resetPassword = async (req, res) => {
-    const { email} = req.body;
+    const { emailReset } = req.body;
     try{
         const userResult = await db.query(
-            `SELECT * FROM users WHERE email = $1`, [email]
+            `SELECT * FROM users WHERE email = $1`, [emailReset]
         );
         const user = userResult.rows[0];
 
@@ -68,7 +68,7 @@ exports.resetPassword = async (req, res) => {
 
         await db.query(
             `INSERT INTO password_resets (email, token, expires_at) VALUES ($1, $2, $3)`,
-            [email, token, expiry]
+            [emailReset, token, expiry]
         );
 
         const resetLink = `https://cleancloud.onrender.com/reset-password?token=${token}`;
