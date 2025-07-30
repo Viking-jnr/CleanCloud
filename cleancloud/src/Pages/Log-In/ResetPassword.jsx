@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const ResetPassword = () => {
@@ -10,8 +10,32 @@ const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    //To conditionally rnder the for,
+
+    const [validToken, setValidToken] = useState(false);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (!token) {
+        setError("Missing token in URL.");
+        return;
+        }
+
+        axios
+        .get(`https://cleancloud.onrender.com/auth/validate-token?token=${token}`)
+        .then(() => setValidToken(true))
+        .catch((err) => {
+            const msg = err.response?.data?.error || "Invalid or expired link";
+            setError(msg);
+        });
+    }, [token]);
+
     //Show error if token is missing
     if (!token) return <p>Invalid or expired link</p>;
+    if (error) return <p>{error}</p>;
+    if (!validToken) return <p>Validating token...</p>;
+
+    
 
     const handleReset = async (e) => {
         e.preventDefault();
