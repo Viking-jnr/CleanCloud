@@ -95,7 +95,7 @@ exports.requestReset = async (req, res) => {
 
 //Token Validation
 exports.validateToken = async (req, res) => {
-    const { token } = req.query;
+    const { token } = req.body;
     try {
         const resetToken = await db.query(
             `SELECT * FROM password_resets WHERE token = $1 AND expires_at > NOW()`,
