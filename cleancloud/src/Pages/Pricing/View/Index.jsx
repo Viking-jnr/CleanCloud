@@ -1,11 +1,13 @@
 import { CheckCircle } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
+import { useState } from "react";
 
 const plans = [
   {
     name: "Lite",
     subtitle: "Everything a regular store needs to process orders.",
-    price: 50,
+    monthlyPrice: 50,
+    yearlyPrice: 43,
     features: [
       "500 Orders per Month",
       "Unlimited Stations",
@@ -21,7 +23,8 @@ const plans = [
   {
     name: "Pro",
     subtitle: "Scale up with Pickup & Delivery and more.",
-    price: 75,
+    monthlyPrice: 75,
+    yearlyPrice: 60,
     features: [
       "Everything in Lite",
       "2,000 Orders per Month",
@@ -37,7 +40,8 @@ const plans = [
   {
     name: "Grow",
     subtitle: "For advanced workflows and large scale.",
-    price: 110,
+    monthlyPrice: 110,
+    yearlyPrice: 95,
     features: [
       "Everything in Pro",
       "3,000 Orders per Month",
@@ -52,7 +56,8 @@ const plans = [
   {
     name: "Grow+",
     subtitle: "With your own dedicated branded customer app",
-    price: 325,
+    monthlyPrice: 325,
+    yearlyPrice: 325,
     features: [
       "Everything in Grow",
       "Your own branded iOS & Android Customer Apps"
@@ -61,6 +66,10 @@ const plans = [
 ];
 
 const Pricing = () => {
+  //Component to display pricing plans
+  const [monthly, setMonthly] = useState(true);
+  const [yearly, setYearly] = useState(false);
+  
     return(
         <>
         <Box sx={{mt:'100px',display: "flex",justifyContent: "center",alignItems: "center", flexDirection: 'column'
@@ -69,13 +78,13 @@ const Pricing = () => {
         <Typography sx={{fontSize: "70px"}}>Simple, predictable pricing </Typography>
         <Typography>Pay as you go service, cancel anytime.</Typography><br />
         <Box>
-            <button style={{backgroundColor: "blue", color: "white", padding: "12px 32px",
+            <button onClick={()=> {setMonthly(true); setYearly(false)}} style={{backgroundColor: monthly ? '#29b6f6': 'white', color: monthly ? 'white': '#353839', padding: "12px 32px",
                 border: "none", borderRadius: "999px", fontSize: "16px", fontWeight: "bold",
                 cursor: "pointer", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
             }}>
                 Pay monthly
                 </button>
-            <button style={{backgroundColor: "blue", color: "white", padding: "12px 32px",
+            <button onClick={()=> {setMonthly(false); setYearly(true)}} style={{backgroundColor: yearly ? '#29b6f6' : 'white', color: yearly ? 'white': '#353839', padding: "12px 32px",
                 border: "none", borderRadius: "999px", fontSize: "16px", fontWeight: "bold",
                 cursor: "pointer", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"}}>
                     Pay yearly
@@ -97,7 +106,7 @@ const Pricing = () => {
         }}>
           <h2 style={{ color: '#333' }}>{plan.name}</h2>
           <p>{plan.subtitle} </p>
-          <h3 style={{ marginTop: 0 }}>${plan.price}<span style={{ fontSize: '14px' }}> /store per month</span></h3>
+          <h3 style={{ marginTop: 0 }}>${monthly ? plan.monthlyPrice : plan.yearlyPrice}<span style={{ fontSize: '14px' }}> /store per month</span></h3>
           <ul style={{ textAlign: 'left', fontSize: '14px', paddingLeft: '20px' }}>
             {plan.features.map((feature, index) => (
               <li key={index}> <CheckCircle sx={{color: 'text.otherSecondary'}} /> {feature}</li>

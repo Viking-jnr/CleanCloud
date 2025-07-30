@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { signup, login, resetPassword} = require('../authentication');
+const { signup, login, requestReset, resetPassword} = require('../authentication');
 
 router.post("/signup", signup);
 router.post("/login", login);
+router.post("/request-reset", requestReset);
 router.post("/reset-password", resetPassword);
 
 

@@ -50,8 +50,8 @@ exports.login = async (req, res) => {
 //Password Reset Function
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-
-exports.resetPassword = async (req, res) => {
+//To send users email reset links
+exports.requestReset = async (req, res) => {
     const { emailReset } = req.body;
     try{
         const userResult = await db.query(
@@ -92,3 +92,44 @@ exports.resetPassword = async (req, res) => {
         res.status(500).json({error: err.message});
     }
 }
+
+//To reset the password after validating the token
+exports.resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try{
+        const resetToken = await db.query(
+            `SELECT * FROM password_resets WHERE token = $1`, [token] 
+        );
+        const resetEntry = resetToken.rows[0];
+
+        //Check if user is found and token is expired
+        if (!resetEntry){
+            return res.status(400).json({error: "Invalid or expired token"});
+        }
+
+        const now = new Date();
+        if (new Date(resetEntry.expires_at) < now){
+            return res.status(400).json({error: "Token has expired"});
+        }
+
+        //Hash the new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        //update the user's password
+        await db.query(
+            `UPDATE users SET password= $1 WHERE email= $2`,
+            [hashedPassword, resetEntry.email]
+        );
+
+        //Delete the reset entry and token so it can not be used again
+        await db.query(
+            `DELETE FROM password_resets WHERE token = $1`, [token]
+        );
+        res.json({ message: "Password has been reset successfully!" });
+    }catch (err) {
+        res.status(500).json({error: err.message});
+        console.error("Error resetting password:", err.message);
+    }
+};

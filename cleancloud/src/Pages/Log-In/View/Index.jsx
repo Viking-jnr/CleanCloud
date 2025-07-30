@@ -53,18 +53,21 @@ const Login = () => {
     const showReset = () => {
         setReset(!reset);
     }
+    const [message, setMessage] = useState("");
 
     const handleReset = async (e) => {
         e.preventDefault();
         try{
             const response = await axios.post(
-                "https://cleancloud.onrender.com/auth/reset-password",
+                "https://cleancloud.onrender.com/auth/request-reset",
                 { emailReset },
                 { headers: { "Content-Type": "application/json"}  }
             );
             console.log(response.data.message);
             setReset(false);
             setEmailReset("");
+            setTimeout(() => {
+                setMessage("Password Reset link sent to your email!");}, 5000);
 
         }catch(err){
             console.error("Reset Failed!", err.response?.data || err.message);
@@ -108,6 +111,7 @@ const Login = () => {
                 }} onClick={handleLogin}>
                     Log in
                 </Button>
+                <Typography fontSize={16}>{message} </Typography>
                 <Typography component={Button} onClick={showReset} sx={{textTransform: 'none', color: 'text.primary'}}>Forgot Password</Typography>
                 <Collapse in={reset} timeout={'auto'} unmountOnExit >
                 <Box  sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>

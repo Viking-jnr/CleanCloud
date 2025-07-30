@@ -8,6 +8,7 @@ import Features from './Pages/Features/View/Index'
 import Pricing from './Pages/Pricing/View/Index'
 import Login from './Pages/Log-In/View/Index'
 import SignUp from './Pages/Log-In/Sign-up'
+import ResetPassword from './Pages/Log-In/ResetPassword'
 
 //App content function to display header and footer only when one is logged in
 function AppContent (){
@@ -26,6 +27,7 @@ function AppContent (){
               <Route path='/features' element={<Features />} />
               <Route path='pricing' element={<Pricing />} />
               <Route path='/sign-up' element={<SignUp />} />
+              <Route path='/reset-password' element={<ResetPassword />} />
             </Routes>
           </main>
 
