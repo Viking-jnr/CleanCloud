@@ -71,7 +71,7 @@ exports.requestReset = async (req, res) => {
             [emailReset, token, expiry]
         );
 
-        const resetLink = `https://cleancloud.onrender.com/reset-password?token=${token}`;
+        const resetLink = `https://cleancloud.onrender.com/auth/reset-password?token=${token}`;
         //send email using nodemailer
         const transporter = nodemailer.createTransport({
             service: 'gmail',
