@@ -1,8 +1,11 @@
-import { Box, Container, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Logo from "../../assets/Images/Logo-Photoroom.png"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Countries from "../../data.json";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import axios from 'axios';
 
 //Styled Components
 const Styles = {
@@ -22,6 +25,7 @@ const numberOfStores = [
 
 const SignUp = () => {
     const navigate = useNavigate();
+    //State to hold company details
     const [companyDetails, setCompanyDetails] = useState({
         companyName: "",
         city: "",
@@ -35,6 +39,43 @@ const SignUp = () => {
             [e.target.name]: e.target.value
         }));
     }
+    //State to hold user details
+    const [userDetails, setUserDetails] = useState({
+        name: "",
+        phoneNumber: "",
+        email: "",
+        password: ""
+    });
+    const handleUserChange = (e) => {
+        setUserDetails(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    }
+
+    const handleSignUp = async () => {
+        try{
+            const response = await axios.post(
+                "https://cleancloud.onrender.com/auth/signup",
+            {
+                company: companyDetails, 
+                user: userDetails
+            },{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        console.log("Sign up successful:", response.data);
+        navigate("/log-in");
+
+        }catch (err) {
+            console.error("Sign up failed:", err.response?.data || err.message);
+        }
+    }
+
+
     return(
         <Box sx={{display: "flex", flexDirection: "column", maxWidth: '100vw'}}>
         <Box ml={10}>
@@ -73,14 +114,21 @@ const SignUp = () => {
                     ))}
                 </Select>
                 <Typography variant="h5" fontWeight={'bold'} gutterBottom>Your Details</Typography>
-                <InputLabel sx={Styles.input} >Your Name</InputLabel>
-                <TextField type="text" fullWidth />
+                <InputLabel sx={Styles.input}  >Your Name</InputLabel>
+                <TextField type="text" name="name" required value={userDetails.name} fullWidth onChange={handleUserChange} />
                 <InputLabel sx={Styles.input} >Phone Number</InputLabel>
-                <TextField type="number" fullWidth />
+                <PhoneInput 
+                country={'ke'} value={userDetails.phoneNumber} onChange={(phone) => {setUserDetails(prev => ({
+                    ...prev,
+                    phoneNumber: phone
+                }))}} enableSearch inputProps={{required : true}} />
                 <InputLabel sx={Styles.input} >Email Address</InputLabel>
-                <TextField type="email" fullWidth />
+                <TextField type="email" required value={userDetails.email} name="email" fullWidth onChange={handleUserChange} />
                 <InputLabel sx={Styles.input} >Password</InputLabel>
-                <TextField type="password" fullWidth />
+                <TextField type="password" required value={userDetails.password} name="password" fullWidth onChange={handleUserChange} />
+                <Button size="large" variant= "contained" onClick={handleSignUp}>
+                    Start Free Trial Now
+                </Button>
             </Paper>
         </Container>
 
@@ -88,4 +136,4 @@ const SignUp = () => {
         </Box>
     );
 }
-export default SignUp;
+export default SignUp;

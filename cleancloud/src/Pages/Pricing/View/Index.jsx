@@ -3,12 +3,12 @@ import { Box, Stack, Typography } from "@mui/material";
 import customBrand from "../../../assets/Images/custom-brand.svg"
 import reviewmodule from "../../../assets/Images/review-module.svg"
 import plantmodule from "../../../assets/Images/plant-module.svg"
-
 const plans = [
   {
     name: "Lite",
     subtitle: "Everything a regular store needs to process orders.",
-    price: 50,
+    monthlyPrice: 50,
+    yearlyPrice: 43,
     features: [
       "500 Orders per Month",
       "Unlimited Stations",
@@ -24,7 +24,8 @@ const plans = [
   {
     name: "Pro",
     subtitle: "Scale up with Pickup & Delivery and more.",
-    price: 75,
+    monthlyPrice: 75,
+    yearlyPrice: 60,
     features: [
       "Everything in Lite",
       "2,000 Orders per Month",
@@ -40,7 +41,8 @@ const plans = [
   {
     name: "Grow",
     subtitle: "For advanced workflows and large scale.",
-    price: 110,
+    monthlyPrice: 110,
+    yearlyPrice: 95,
     features: [
       "Everything in Pro",
       "3,000 Orders per Month",
@@ -55,7 +57,8 @@ const plans = [
   {
     name: "Grow+",
     subtitle: "With your own dedicated branded customer app",
-    price: 325,
+    monthlyPrice: 325,
+    yearlyPrice: 325,
     features: [
       "Everything in Grow",
       "Your own branded iOS & Android Customer Apps"
@@ -76,6 +79,10 @@ const FAQs = [
 ]
 
 const Pricing = () => {
+  //Component to display pricing plans
+  const [monthly, setMonthly] = useState(true);
+  const [yearly, setYearly] = useState(false);
+  
     return(
         <>
         <Box sx={{mt:'100px',display: "flex",justifyContent: "center",alignItems: "center", flexDirection: 'column'
@@ -84,13 +91,13 @@ const Pricing = () => {
         <Typography sx={{fontSize: "70px"}}>Simple, predictable pricing </Typography>
         <Typography>Pay as you go service, cancel anytime.</Typography><br />
         <Box>
-            <button style={{backgroundColor: "blue", color: "white", padding: "12px 32px",
+            <button onClick={()=> {setMonthly(true); setYearly(false)}} style={{backgroundColor: monthly ? '#29b6f6': 'white', color: monthly ? 'white': '#353839', padding: "12px 32px",
                 border: "none", borderRadius: "999px", fontSize: "16px", fontWeight: "bold",
                 cursor: "pointer", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
             }}>
                 Pay monthly
                 </button>
-            <button style={{backgroundColor: "blue", color: "white", padding: "12px 32px",
+            <button onClick={()=> {setMonthly(false); setYearly(true)}} style={{backgroundColor: yearly ? '#29b6f6' : 'white', color: yearly ? 'white': '#353839', padding: "12px 32px",
                 border: "none", borderRadius: "999px", fontSize: "16px", fontWeight: "bold",
                 cursor: "pointer", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)"}}>
                     Pay yearly
