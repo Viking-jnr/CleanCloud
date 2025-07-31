@@ -11,9 +11,13 @@ const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    useEffect(() => {
+       console.log("ResetPassword component mounted");
+    }, []);
+
     //To conditionally render the form
 
-    /*const [validToken, setValidToken] = useState(false);
+    const [validToken, setValidToken] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -34,7 +38,7 @@ const ResetPassword = () => {
     //Show error if token is missing
     if (!token) return <p>Invalid or expired link</p>;
     if (error) return <p>{error}</p>;
-    if (!validToken) return <p>Validating token...</p>;*/
+    if (!validToken) return <p>Validating token...</p>;
 
     
 
