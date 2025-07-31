@@ -112,6 +112,7 @@ const Login = () => {
                     Log in
                 </Button>
                 <Typography fontSize={16} color="red">{message} </Typography>
+             <>   
                 <Typography component={Button} onClick={showReset} sx={{textTransform: 'none', color: 'text.primary'}}>Forgot Password</Typography>
                 <Collapse in={reset} timeout={'auto'} unmountOnExit >
                 <Box  sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
@@ -129,6 +130,7 @@ const Login = () => {
                 </Button>
                 </Box>
                 </Collapse>
+                </>
             </Box>
             {showDialog && (
                 <div style={{

@@ -1,3 +1,4 @@
+import  Typography  from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -65,7 +66,7 @@ const ResetPassword = () => {
             <input type='password' placeholder="Confirm New Password" value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)} required />
             <button type='submit'>Reset Password</button>
-            <Typography variant="body2" color="error">{message} </Typography>
+            { message && (<Typography variant="body2" color="error">{message} </Typography> )}
         </form>
     );
 }
