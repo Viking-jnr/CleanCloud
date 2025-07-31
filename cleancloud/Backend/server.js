@@ -16,10 +16,11 @@ app.listen(4000, () => console.log("Server is running on port 4000"));
 const authRoutes = require('./routes/authRoutes');
 app.use('/auth', authRoutes);
 
-
-app.use(express.static(path.join(__dirname, 'dist')));
+//To serve static files
+app.use(express.static(path.join(__dirname, "..", "dist")));
+// catch-all route for React Router
 app.get(/.*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
 });
 
 

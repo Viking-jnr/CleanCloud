@@ -71,7 +71,7 @@ exports.requestReset = async (req, res) => {
             [emailReset, token, expiry]
         );
 
-        const resetLink = `https://cleancloud.onrender.com/auth/reset-password?token=${token}`;
+        const resetLink = `https://cleancloud.onrender.com/reset-password?token=${token}`;
         //send email using nodemailer
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -93,24 +93,6 @@ exports.requestReset = async (req, res) => {
     }
 }
 
-//Token Validation
-exports.validateToken = async (req, res) => {
-    const { token } = req.body;
-    try {
-        const resetToken = await db.query(
-            `SELECT * FROM password_resets WHERE token = $1 AND expires_at > NOW()`,
-             [token]
-        );
-
-        if (resetToken.rowCount === 0) {
-            return res.status(400).send("This link is invalid or has expired.");
-  }
-        res.status(200).json({ token})
-    } catch (err){
-        res.status(500).json({ error: err.message });
-        console.error("Error validating token:", err.message);
-    }
-}
 
 //To reset the password after validating the token
 exports.resetPassword = async (req, res) => {

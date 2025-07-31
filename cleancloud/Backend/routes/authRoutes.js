@@ -5,7 +5,6 @@ const { signup, login, requestReset, resetPassword, validateToken } = require('.
 router.post("/signup", signup);
 router.post("/login", login);
 router.post("/request-reset", requestReset);
-router.get("/reset-password/:token", validateToken);
 router.post("/reset-password", resetPassword);
 
 
