@@ -42,6 +42,7 @@ const Login = () => {
             setShowDialog(true);
         }catch (err) {
             console.error("Login Failed!", err);
+            setMessage("Invalid email or password!!")
         }
         
     }
@@ -108,7 +109,7 @@ const Login = () => {
                 />
                 <Button variant="contained" type="submit"  sx={{backgroundColor: 'background.button', mt: 3, mb: 3, fontWeight: 'bold', textTransform: 'none',
                      '&:hover': { backgroundColor: 'background.default', color: 'text.otherSecondary'}
-                }} onClick={handleLogin}>
+                }} onClick={handleLogin} >
                     Log in
                 </Button>
                 <Typography fontSize={16} color="red">{message} </Typography>

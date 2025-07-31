@@ -1,15 +1,23 @@
+import { Box, Container, IconButton, TextField } from "@mui/material";
 import  Typography  from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import Logo from "../../assets/Images/Logo-Photoroom.png";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const ResetPassword = () => {
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const token = searchParams.get("token");
 
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     useEffect(() => {
        console.log("ResetPassword component mounted");
@@ -57,6 +65,7 @@ const ResetPassword = () => {
             );
             console.log("Password reset successful:", response.data);
             setMessage("Password has been reset successfully!");
+            navigate('/log-in'); // Redirect to login after successful reset
         }catch (err) {
             console.error("Password reset failed:", err.response?.data || err.message);
             setMessage("Failed to reset password. Please try again.");
@@ -64,14 +73,38 @@ const ResetPassword = () => {
     }
 
     return (
-        <form onSubmit={handleReset}>
-            <input type='password' placeholder="New Password" value={newPassword} 
-            onChange={(e) => setNewPassword(e.target.value)} required/>
-            <input type='password' placeholder="Confirm New Password" value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)} required />
-            <button type='submit'>Reset Password</button>
-            { message && (<Typography variant="body2" color="error">{message} </Typography> )}
-        </form>
+        <Box sx={{ display: 'flex', flexDirection: 'column', maxWidth: '100vw'}}>
+            <Box ml={10}>
+                <img src={Logo} alt="Digital Solutions" onClick={() => navigate("/")} style={{height: '150px', width: '200px'}} />
+            </Box>
+
+            <Container maxWidth= 'md' sx={{display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center',  gap: '10px'}}>
+                <Typography variant="h3" textAlign={'center'}>Reset Password</Typography>
+
+                <TextField label="New Password"
+                    type= {showPassword ? "text": "password"} required value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
+                    slotProps={{input: {
+                        endAdornment: <IconButton edge='end' onClick={handleShowPassword}>
+                            {showPassword ? <VisibilityOff fontSize="small" />: <Visibility fontSize="small" />} 
+                        </IconButton>
+                    }}}
+                />
+                <TextField label="Confirm Password"
+                type= {showPassword ? "text": "password"} required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} 
+                slotProps={{input: {
+                    endAdornment: <IconButton edge='end' onClick={handleShowPassword}>
+                        {showPassword ? <VisibilityOff fontSize="small" />: <Visibility fontSize="small" />} 
+                    </IconButton>
+                }}}
+                />
+                { message && (<Typography variant="body2" color="error">{message} </Typography> )}
+
+                <Button variant="contained" type="submit"  sx={{backgroundColor: 'background.button', mt: 3, mb: 3, fontWeight: 'bold', textTransform: 'none',
+                                     '&:hover': { backgroundColor: 'background.default', color: 'text.otherSecondary'}
+                                }} onClick={handleReset} >Reset Password</Button>
+            </Container>
+        
+        </Box>
     );
 }
 
