@@ -13,8 +13,8 @@ import ResetPassword from './Pages/Log-In/ResetPassword'
 //App content function to display header and footer only when one is logged in
 function AppContent (){
   const location = useLocation();
-  const hideHeaderFooter = location.pathname === '/log-in'|| location.pathname=== "/sign-up";
-  const hideFooter = location.pathname === '/log-in'
+  const hideHeaderFooter = location.pathname === '/log-in'|| location.pathname=== "/sign-up" || location.pathname === '/reset-password';
+  const hideFooter = location.pathname === '/log-in' || location.pathname === '/reset-password'
 
   return(
     <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>

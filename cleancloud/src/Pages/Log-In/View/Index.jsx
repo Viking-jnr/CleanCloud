@@ -42,6 +42,7 @@ const Login = () => {
             setShowDialog(true);
         }catch (err) {
             console.error("Login Failed!", err);
+            setMessage("Invalid email or password!!")
         }
         
     }
@@ -108,10 +109,11 @@ const Login = () => {
                 />
                 <Button variant="contained" type="submit"  sx={{backgroundColor: 'background.button', mt: 3, mb: 3, fontWeight: 'bold', textTransform: 'none',
                      '&:hover': { backgroundColor: 'background.default', color: 'text.otherSecondary'}
-                }} onClick={handleLogin}>
+                }} onClick={handleLogin} >
                     Log in
                 </Button>
-                <Typography fontSize={16}>{message} </Typography>
+                <Typography fontSize={16} color="red">{message} </Typography>
+             <>   
                 <Typography component={Button} onClick={showReset} sx={{textTransform: 'none', color: 'text.primary'}}>Forgot Password</Typography>
                 <Collapse in={reset} timeout={'auto'} unmountOnExit >
                 <Box  sx={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
@@ -129,6 +131,7 @@ const Login = () => {
                 </Button>
                 </Box>
                 </Collapse>
+                </>
             </Box>
             {showDialog && (
                 <div style={{

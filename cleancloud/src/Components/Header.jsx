@@ -264,10 +264,20 @@ const Header = () => {
         <Stack direction={"row"} spacing={3}>
             {/* Conditional rendering based on login status */}
             {isLoggedIn ? (
-                <>
-                
-                <Avatar sx={{backgroundColor: 'background.button'}}>{firstLetter} </Avatar>
-                </>
+               <div style={{position: 'relative', width: '150px' }} onMouseEnter={handleProfileMenu} onMouseLeave={handleProfileMenu}>
+                            
+                    <Avatar sx={{backgroundColor: 'background.button'}} >
+                        {firstLetter} 
+                    </Avatar>
+                    {/*Profile Menu*/}
+                    {profileMenu && (
+                        <Paper elevation={5} sx={{position: 'absolute', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'left'}}>
+                            <NavButton>Profile Management</NavButton>
+                            <Divider />
+                            <NavButton startIcon={<Logout />} onClick={()=> {localStorage.clear(); navigate('/log-in'); } } >Log out</NavButton>
+                        </Paper>
+                    )}
+                </div>
             ):(
             <>
             <Button sx={{textTransform: "none", display: "in-block",color: "text.secondary", backgroundColor: " #29b6f6", 

@@ -9,4 +9,7 @@ router.get("/reset-password/:token", validateToken);
 router.post("/reset-password", resetPassword);
 
 
+ 
+
+
 module.exports = router;
