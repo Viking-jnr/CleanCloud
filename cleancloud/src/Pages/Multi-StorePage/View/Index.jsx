@@ -54,6 +54,7 @@ const MultiStore =()=> {
                         <img src={hero_multi_store} alt="Multi Stores" style={{ height: isTablet ? "600px": "auto",width: isTablet ? "auto": "100%" }} />
                     </Box>
             </Box>
+            <Typography>MULTI STORE BENEFITS</Typography>
 
 
 

@@ -1,8 +1,9 @@
-import { CheckCircle } from "@mui/icons-material";
-import { Box, Stack, Typography } from "@mui/material";
+import { ArrowDropDown, CheckCircle } from "@mui/icons-material";
+import { Box, Collapse, Divider, IconButton, Link, Stack, Typography } from "@mui/material";
 import customBrand from "../../../assets/Images/custom-brand.svg"
 import reviewmodule from "../../../assets/Images/review-module.svg"
 import plantmodule from "../../../assets/Images/plant-module.svg"
+import { useState } from "react";
 const plans = [
   {
     name: "Lite",
@@ -66,22 +67,28 @@ const plans = [
   }
 ];
 
-const FAQs = [
-  {faq: "Are there any hidden fees?",
+const faqs = [
+  {id: 1,faq: "Are there any hidden fees?",
    answer: "Apart from selecting your subscription plan and setup plan there are no mandatory fees with the system. There are optional additional modules and services, such as the custom branded app that carry an additional fee. Get in touch with us to discuss further."},
-   {faq: "Does the service include an app for me?", 
+   {id: 2,faq: "Does the service include an app for me?", 
     answer: "We include a free booking tool for your website and your store will be on the CleanCloud iOS and Android apps with your branding, which has over 140,000 downloads on iOS and Android. Once customers have selected your store in the app it will remember your store as their default. If you prefer we can build a dedicated branded app for you as an additional service or as part of the Grow+ subscription, please contact us for more information."
    },
-   {faq: "What if I have more than 3,000 orders per month?", answer: "Contact us with your expected order volume per store and we will be able to provide you with your own dedicated pricing."},
-   {faq: "How long does it take to be fully operational?", answer: "We can set you up overnight with our Express Onboarding, however, we generally recommend 2-6 weeks for a full thorough setup including order monitoring."},
-   {faq: "Are there any contracts and can we change plans?", answer: "We don't do contracts for subscription fees unless there are exceptional circumstances. You can upgrade plans and change from monthly to annual at any time."},
-   {faq: "What are your support hours?", answer: "We offer 24/7 support, our preferred support method is via ticket from within the system. However, we also offer phone support 24/7 for our Pro customers and above."},
+   {id: 3,faq: "What if I have more than 3,000 orders per month?", answer: "Contact us with your expected order volume per store and we will be able to provide you with your own dedicated pricing."},
+   {id: 4,faq: "How long does it take to be fully operational?", answer: "We can set you up overnight with our Express Onboarding, however, we generally recommend 2-6 weeks for a full thorough setup including order monitoring."},
+   {id: 5,faq: "Are there any contracts and can we change plans?", answer: "We don't do contracts for subscription fees unless there are exceptional circumstances. You can upgrade plans and change from monthly to annual at any time."},
+   {id: 6,faq: "What are your support hours?", answer: "We offer 24/7 support, our preferred support method is via ticket from within the system. However, we also offer phone support 24/7 for our Pro customers and above."},
 ]
 
 const Pricing = () => {
   //Component to display pricing plans
   const [monthly, setMonthly] = useState(true);
   const [yearly, setYearly] = useState(false);
+  const [activeAnswer, setActiveAnswer] = useState(null);
+  const handleAnswer = (id) => {
+    setActiveAnswer(prev => (
+       prev === id ? null : id
+    ));
+  }
   
     return(
         <>
@@ -161,9 +168,22 @@ const Pricing = () => {
       </Box>
     </Stack>
     </Box>
-    <Box sx={{alignSelf: 'center', alignItems: 'center', justifyContent: 'center'}}>
+    <Box sx={{ alignItems: 'center', justifyContent: 'center', ml: {xs: 2, md: 5, lg: 50}, mt: 10, mr: {xs:2, md: 5, lg: 50}}}>
       <Typography>Frequently asked Questions</Typography>
       <Typography variant="h3">FAQS</Typography>
+      {faqs.map((item) =>(
+        <Box component={Link} onClick={() => handleAnswer(item.id)} key={item.id} sx={{textDecoration: 'none'}}>
+          <Typography color="black" >{item.faq} </Typography>
+          <IconButton edge="start">
+            <ArrowDropDown fontSize="small"/>
+          </IconButton>
+          <Collapse in={activeAnswer === item.id}>
+          <Typography sx={{color: 'black'}}>{item.answer} </Typography>
+          </Collapse>
+          <hr />
+        </Box>
+      ))}
+
     </Box>
     </>
     )
