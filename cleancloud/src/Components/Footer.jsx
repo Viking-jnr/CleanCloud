@@ -79,11 +79,11 @@ return(
                 {/*Platforms*/}
                 <Box sx={Styles.boxes}>
                     <Typography fontWeight={"bold"}>Platform</Typography>
-                    <Link href="/features" sx={Styles.link}>Features</Link>
+                    <Link href="/features"sx={Styles.link}>Features</Link>
                     <Link href="/multi-store" sx={Styles.link}>Multi-Store</Link>
                     <Link href="/pickup-and-delivery" sx={Styles.link}>Pickup and Delivery</Link>
                     <Link href="/website-builder" sx={Styles.link}>Website Builder</Link>
-                    <Link href="/grow-your-business" sx={Styles.link}>Grow Your Business</Link>
+                    <Link href="/grow-ur-business" sx={Styles.link}>Grow Your Business</Link>
                     <Link href="/testimonials" sx={Styles.link}>Testimonials</Link>
                     <Link href="/payroll" sx={Styles.link}>Payroll</Link>
                     <Link href="/pricing" sx={Styles.link}>Pricing</Link>
@@ -94,23 +94,23 @@ return(
                     <Typography fontWeight={"bold"}>Resources</Typography>
                     <Link href="/sign-up" sx={Styles.link}>Sign Up</Link>
                     <Link href="/contact-us" sx={Styles.link}>Contact Us</Link>
-                    <Link sx={Styles.link}>Product Updates</Link>
-                    <Link sx={Styles.link}>Blog</Link>
-                    <Link sx={Styles.link}>API</Link>
+                    <Link href="/product-updates" sx={Styles.link}>Product Updates</Link>
+                    <Link href="/blog" sx={Styles.link}>Blog</Link>
+                    <Link href="/api" sx={Styles.link}>API</Link>
                 </Box>
                 {/*Business Types*/}
                 <Box sx={Styles.boxes}>
                     <Typography fontWeight={"bold"}>Business Types</Typography>
-                    <Link sx={Styles.link}>Dry Cleaning</Link>
-                    <Link sx={Styles.link}>Laundromats</Link>
-                    <Link sx={Styles.link}>Shoe Cleaning</Link>
+                    <Link href="/dry-cleaning" sx={Styles.link}>Dry Cleaning</Link>
+                    <Link href="/laundromats" sx={Styles.link}>Laundromats</Link>
+                    <Link href="/shoe-cleaning" sx={Styles.link}>Shoe Cleaning</Link>
                 </Box>
                 {/*Featured Blogs*/}
                 <Box sx={Styles.boxes}>
                     <Typography fontWeight={"bold"}>Featured Blogs</Typography>
-                    <Link sx={Styles.link}>How to Buy a Laundromart</Link>
-                    <Link sx={Styles.link}>Build a Website for you Laundry Business</Link>
-                    <Link sx={Styles.link}>Key Metrics for Laundromat Success</Link>
+                    <Link href="/How-to-Buy-a-Laundromart" sx={Styles.link}>How to Buy a Laundromart</Link>
+                    <Link href="/Build-a-Website-for-you-Laundry-Business" sx={Styles.link}>Build a Website for you Laundry Business</Link>
+                    <Link href="/Key-Metrics-for-Laundromat-Success" sx={Styles.link}>Key Metrics for Laundromat Success</Link>
                 </Box>
             </Box>
             <hr style={{width: "100%", color: "grey"}} />
