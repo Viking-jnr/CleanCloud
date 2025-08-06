@@ -35,7 +35,7 @@ const Header = () => {
     const handleMenuOpen= (e) => {
         setAnchorEl(e.currentTarget);
     }
-    const handleMenuClose = (e) =>{
+    const handleMenuClose = () =>{
         setAnchorEl(null);
     }
     {/* A List of the elements in Feature */}

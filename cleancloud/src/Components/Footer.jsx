@@ -79,21 +79,21 @@ return(
                 {/*Platforms*/}
                 <Box sx={Styles.boxes}>
                     <Typography fontWeight={"bold"}>Platform</Typography>
-                    <Link sx={Styles.link}>Features</Link>
-                    <Link sx={Styles.link}>Multi-Store</Link>
-                    <Link sx={Styles.link}>Pickup and Delivery</Link>
-                    <Link sx={Styles.link}>Website Builder</Link>
-                    <Link sx={Styles.link}>Grow Your Business</Link>
-                    <Link sx={Styles.link}>Testimonials</Link>
-                    <Link sx={Styles.link}>Payroll</Link>
-                    <Link sx={Styles.link}>Pricing</Link>
-                    <Link sx={Styles.link}>Integrations</Link>
+                    <Link href="/features" sx={Styles.link}>Features</Link>
+                    <Link href="/multi-store" sx={Styles.link}>Multi-Store</Link>
+                    <Link href="/pickup-and-delivery" sx={Styles.link}>Pickup and Delivery</Link>
+                    <Link href="/website-builder" sx={Styles.link}>Website Builder</Link>
+                    <Link href="/grow-your-business" sx={Styles.link}>Grow Your Business</Link>
+                    <Link href="/testimonials" sx={Styles.link}>Testimonials</Link>
+                    <Link href="/payroll" sx={Styles.link}>Payroll</Link>
+                    <Link href="/pricing" sx={Styles.link}>Pricing</Link>
+                    <Link href="/integrations" sx={Styles.link}>Integrations</Link>
                 </Box>
                 {/*Resources*/}
                 <Box sx={Styles.boxes}>
                     <Typography fontWeight={"bold"}>Resources</Typography>
-                    <Link sx={Styles.link}>Sign Up</Link>
-                    <Link sx={Styles.link}>Contact Us</Link>
+                    <Link href="/sign-up" sx={Styles.link}>Sign Up</Link>
+                    <Link href="/contact-us" sx={Styles.link}>Contact Us</Link>
                     <Link sx={Styles.link}>Product Updates</Link>
                     <Link sx={Styles.link}>Blog</Link>
                     <Link sx={Styles.link}>API</Link>

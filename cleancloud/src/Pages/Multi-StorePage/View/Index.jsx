@@ -54,6 +54,12 @@ const MultiStore =()=> {
                         <img src={hero_multi_store} alt="Multi Stores" style={{ height: isTablet ? "600px": "auto",width: isTablet ? "auto": "100%" }} />
                     </Box>
             </Box>
+            <Box sx={{alignItems: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column',
+                 width: '40%', alignSelf: 'center', gap: 1}}>
+                <Typography sx={{color: 'text.otherPrimary'}}>MULTI STORE BENEFITS</Typography>
+                <Typography variant='h2'>Take Advantage of Our Multi-Store benefits</Typography>
+                <Typography>Multi-Store functionality that scales with your business.</Typography>
+            </Box>
 
 
 
