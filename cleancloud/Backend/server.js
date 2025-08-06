@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
 
-const allowedOrigins = ['http://localhost:4000', 'http://localhost:5173'];
+const allowedOrigins = ['http://localhost:4000', 'http://localhost:5173','https://cleancloud.onrender.com'];
 const app = express();
 app.use(cors({
     origin: function (origin, callback) {
