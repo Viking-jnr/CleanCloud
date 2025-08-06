@@ -14,12 +14,19 @@ import Store from './Pages/Store/View/Index'
 //App content function to display header and footer only when one is logged in
 function AppContent (){
   const location = useLocation();
-  const hideHeaderFooter = location.pathname === '/log-in'|| location.pathname=== "/sign-up" || location.pathname === '/reset-password';
-  const hideFooter = location.pathname === '/log-in' || location.pathname === '/reset-password'
+  const hideHeader = 
+  location.pathname === '/log-in'|| 
+  location.pathname=== "/sign-up" || 
+  location.pathname === '/reset-password' ||
+  location.pathname === '/store';
+  const hideFooter = 
+  location.pathname === '/log-in' || 
+  location.pathname === '/reset-password' ||
+  location.pathname === '/store';
 
   return(
     <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
-          {!hideHeaderFooter && <Header /> }
+          {!hideHeader && <Header /> }
           <main style={{flexGrow: 1}}>
             <Routes>
               <Route path="/" element= {<HomePage />} />
@@ -33,7 +40,7 @@ function AppContent (){
             </Routes>
           </main>
 
-          {(!hideHeaderFooter || !hideFooter) && <Footer />}
+          {(!hideHeader || !hideFooter) && <Footer />}
         </div>
   )
 }

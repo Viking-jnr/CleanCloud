@@ -20,7 +20,7 @@ const Login = () => {
         if (showDialog) {
             const timer = setTimeout(() => {
             setShowDialog(false);
-            navigate('/');
+            navigate('/store'); //redirect to store after login
             }, 3000); // dismiss after 3 seconds
             return () => clearTimeout(timer);
         }
@@ -42,7 +42,8 @@ const Login = () => {
             setShowDialog(true);
         }catch (err) {
             console.error("Login Failed!", err);
-            setMessage("Invalid email or password!!")
+            setMessage("Invalid email or password!!");
+            setPassword("");
         }
         
     }
