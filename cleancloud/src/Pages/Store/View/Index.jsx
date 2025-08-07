@@ -1,17 +1,18 @@
-import {  Box, Button, IconButton, Tab, Tabs, Typography } from "@mui/material";
+import {  Avatar, Box, Button, Divider, IconButton, Paper, Tab, Tabs, Typography } from "@mui/material";
 import Logo from "../../../assets/Images/CleanCloud_Icon_White.svg";
-import { Error, Menu, Message, Search } from "@mui/icons-material";
+import { Error, Logout, Menu, Message, Search } from "@mui/icons-material";
 import { useState } from "react";
 import NewOrder from "../NewOrder";
 import Cleaning from "../Cleaning";
 import Detail from "../Detail";
+import { useNavigate } from "react-router-dom";
 
 //styles
 const styles = {
     tab: {
-        color: 'text.otherPrimary',
+        color: 'text.otherPrimary',//color when inactive
         '&.Mui-selected':{
-            color: 'text.otherSecondary'
+            color: 'text.otherSecondary'//color when selected
         },
         fontWeight: 'bold',
         textTransform: 'none',
@@ -23,11 +24,18 @@ const styles = {
 }
 
 const Store = () => {
+    const navigate = useNavigate();
     //To check if user is logged in
     const isLoggedIn = !!localStorage.getItem('authToken');
     const email = localStorage.getItem('email');
     //To get the first letter of the email
     const firstLetter = email ? email.charAt(0).toUpperCase() : '';
+
+    //To handle profile drop down menu
+        const [profileMenu, setProfileMenu] = useState(false);
+        const handleProfileMenu = () => {
+            setProfileMenu(!profileMenu);
+        };
 
 
     const [activeTab, setActiveTab] = useState(0);
@@ -63,10 +71,20 @@ const Store = () => {
                         <Error />
                     </Box >
                     {isLoggedIn && (
-                        <Box component={Button} sx={{bgcolor: 'background.button', borderRadius: '50%', width: '15px', height: '40px'}}>
-                            <Typography >{firstLetter} </Typography>
+                        <div style={{position: 'relative', width: '150px' }} onMouseEnter={handleProfileMenu} onMouseLeave={handleProfileMenu}>
+                        <Box  >
+                            <Avatar sx={{bgcolor: 'background.button', cursor: 'pointer'}} >{firstLetter} </Avatar>
                         </Box>
+                        {profileMenu && (
+                                <Paper elevation={5} sx={{position: 'absolute', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'left'}}>
+                                    <Button>Profile Management</Button>
+                                    <Divider />
+                                    <Button startIcon={<Logout />} onClick={()=> {localStorage.clear(); navigate('/log-in'); } } >Log out</Button>
+                                </Paper>
+                            )}
+                        </div>
                     )}
+                    <Button sx={{color: 'text.secondary', bgcolor: 'background.button', fontWeight: 'bold'}}>Join Now</Button>
                 </Box>
             </Box>
             <Box sx ={{flexGrow: 1}}>
