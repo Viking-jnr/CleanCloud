@@ -1,14 +1,7 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Grid, Tab, Tabs, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import Blouse from '../../assets/Images/Blouse.png';
-import Dress from '../../assets/Images/Dress.png';
-import Hat from '../../assets/Images/Hat.png';
-import EveningDress from '../../assets/Images/EveningDress.png';
-import Jacket from '../../assets/Images/Jacket.png';
-import Jeans from '../../assets/Images/Jeans.png';
-import Jumpsuit from '../../assets/Images/Jumpsuit.png';
-import Overcoat from '../../assets/Images/Overcoat.png';
-import Polo from '../../assets/Images/Polo.png';
+import { getImage } from "../../Utils/ImageLoader";
+
 
 //styles
 const styles = {
@@ -38,14 +31,14 @@ const Cards = ({ clothName, image }) => {
     };
 
     return (
-        <Card sx={{width: 105, height: 150, alignItems: 'space-between'}}>
+        <Card sx={{width: 100, height: 130, alignItems: 'space-between', '&:hover': {bgcolor: '#d3ebf7ff'}}}>
             <CardActionArea onClick={handleIncrement}>
             <Box mb={1} mt={1} alignItems={'center'} display={'flex'} justifyContent={'center'}>
                 <Typography variant="caption1"  fontSize={'0.9rem'} textAlign={'center'} >
                     {clothName}
                 </Typography>
             </Box>
-            <CardMedia component={'img'} image={image} alt={clothName} sx={{height: '30%', flex:1}} />
+            <CardMedia component={'img'} image={image} alt={clothName} title={clothName} sx={{height: '30%', flex:1}} />
             </CardActionArea>
         { count > 0 && (
             <Box  sx={{ display: 'flex', alignItems: 'center'}}>
@@ -74,20 +67,55 @@ const NewOrder = () => {
 
     //Dry cleaning clothes 
     const dryCleaning = [
-        { name: 'Blouse', image: Blouse },
-        { name: 'Dress', image: Dress },
-        { name: 'Dress, Evening', image: EveningDress },
-        { name: 'Hat', image: Hat },
-        { name: 'Jacket', image: Jacket },
-        { name: 'Jeans', image: Jeans },
-        { name: 'Jumpsuit', image: Jumpsuit },
-        { name: 'Overcoat', image: Overcoat },
-        { name: 'Polo', image: Polo }
+        { name: 'Blouse', image: getImage('Blouse') },
+        { name: 'Dress', image: getImage('Dress') },
+        { name: 'Dress, Evening', image: getImage('EveningDress') },
+        { name: 'Hat', image: getImage('Hat') },
+        { name: 'Jacket', image: getImage('Jacket') },
+        { name: 'Jeans', image: getImage('Jeans') },
+        { name: 'Jumpsuit', image: getImage('Jumpsuit') },
+        { name: 'Overcoat', image: getImage('Overcoat') },
+        { name: 'Polo Shirt', image: getImage('Polo') },
+        { name: 'Scarf', image: getImage('Scarf') },
+        { name: 'Shirt', image: getImage('Shirt') },
+        { name: 'Skirt', image: getImage('Skirt') },
+        { name: 'Skirt, pleated', image: getImage('PleatedSkirt') },
+        { name: 'Suit', image: getImage('Suit') },
+        { name: 'Sweater', image: getImage('Sweater') },
+        { name: 'Tie', image: getImage('Tie') },
+        { name: 'Trousers', image: getImage('Trousers') },
+        { name: 'Waistcoat', image: getImage('Waistcoat') },
+    ]
+
+    //Laundry clothes
+    const Laundry = [
+        { name: 'Laundry', image: getImage('Laundry')},
+        { name: 'Duvet', image: getImage('Duvet')},
+        { name: 'Duvet, cover', image: getImage('DuvetCovet')},
+        { name: 'Duvet, Feather', image: getImage('DuvetFeather')},
+        { name: 'Pillow Case', image: getImage('Pillow')},
+        { name: 'Polo Shirt', image: getImage('PoloShirt')},
+        { name: 'Sheet', image: getImage('Sheet')},
+        { name: 'Shirt', image: getImage('Shirt')},
+        { name: 'T-Shirt', image: getImage('T-shirt')},
+        { name: 'Tablecloth', image: getImage('TableCloth')},
+        { name: 'Towel, L', image: getImage('Towel')},
+        { name: 'Towel, S', image: getImage('TowelS')},
+    ]
+
+    //Pressed/Ironed clothes
+    const Pressed = [
+        { name: 'Hat', image: getImage('Hat') },
+        { name: 'Jeans', image: getImage('Jeans') },
+        { name: 'Jumpsuit', image: getImage('Jumpsuit') },
+        { name: 'Shirt', image: getImage('Shirt') },
+        { name: 'Skirt', image: getImage('Skirt') },
+        { name: 'Skirt, pleated', image: getImage('PleatedSkirt') },
     ]
     return (
         <Box ml={1} mt={2}>
             <Box>
-                <Tabs value={activeTab} variant="scrollable" onChange={handleTabChange} sx={{'& .MuiTabs-indicator': { display: 'none'}}}>
+                <Tabs value={activeTab} variant="scrollable" scrollButtons='auto' onChange={handleTabChange} sx={{'& .MuiTabs-indicator': { display: 'none'}}}>
                     <Tab label="Dry Cleaning" sx={{...styles.tab, '&.Mui-selected': {color: 'text.secondary',backgroundColor: 'background.button'}}}/>
                     <Tab label="Laundry" sx={{...styles.tab, '&.Mui-selected': {color: 'text.secondary',backgroundColor: '#76cff8ff'}}}/>
                     <Tab label="Pressed/Ironed" sx={{...styles.tab, '&.Mui-selected': {color: 'text.secondary',backgroundColor: '#2bf195ff'}}}/>
@@ -95,10 +123,31 @@ const NewOrder = () => {
                     <Tab label="Alterations" sx={{...styles.tab, '&.Mui-selected': {color: 'text.secondary',backgroundColor: '#f5a55bff'}}}/>
                 </Tabs>
 
-                <Box mt={2}>
+                <Box mt={2} maxWidth={{xs: '100%', lg: '65%'}} sx={{backgroundColor: 'background.footer', pb: 5, pt: 2}}>
+                    {/*Dry Cleaning Section*/}
                     { activeTab === 0 && (
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1}>
                             {dryCleaning.map((cloth, index) => (
+                                <Grid item key={index}>
+                                    <Cards clothName={cloth.name} image={cloth.image} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    )}
+                    {/*Laundry Section*/}
+                    { activeTab === 1 && (
+                        <Grid container spacing={1}>
+                            {Laundry.map((cloth, index) => (
+                                <Grid item key={index}>
+                                    <Cards clothName={cloth.name} image={cloth.image} />
+                                </Grid>
+                            ))}
+                        </Grid>
+                    )}
+                    {/*Pressed/Ironed Section*/}
+                    { activeTab === 2 && (
+                        <Grid container spacing={1}>
+                            {Pressed.map((cloth, index) => (
                                 <Grid item key={index}>
                                     <Cards clothName={cloth.name} image={cloth.image} />
                                 </Grid>
