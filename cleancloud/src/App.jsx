@@ -60,7 +60,7 @@ function App() {
         paper: "white",
         other: "#0F1A30",//Dark blue background for some other components
         button: "#29b6f6",//Light blue for some buttons
-        footer: "#eeeeee"//Dark Grey footer background
+        footer: "#eeeeee"//Dark Grey footer background 
       },
     },
     breakpoints: {
