@@ -71,18 +71,18 @@ const Store = () => {
                         <Error />
                     </Box >
                     {isLoggedIn && (
-                        <div style={{position: 'relative', width: '150px' }} onMouseEnter={handleProfileMenu} onMouseLeave={handleProfileMenu}>
+                        <Box sx={{position: 'relative', width: '150px' }} onMouseEnter={handleProfileMenu} onMouseLeave={handleProfileMenu}>
                         <Box  >
                             <Avatar sx={{bgcolor: 'background.button', cursor: 'pointer'}} >{firstLetter} </Avatar>
                         </Box>
                         {profileMenu && (
-                                <Paper elevation={5} sx={{position: 'absolute', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'left'}}>
+                                <Paper elevation={5} sx={{position: 'absolute', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'left', zIndex: 1000}}>
                                     <Button>Profile Management</Button>
                                     <Divider />
                                     <Button startIcon={<Logout />} onClick={()=> {localStorage.clear(); navigate('/log-in'); } } >Log out</Button>
                                 </Paper>
                             )}
-                        </div>
+                        </Box>
                     )}
                     <Button sx={{color: 'text.secondary', bgcolor: 'background.button', fontWeight: 'bold'}}>Join Now</Button>
                 </Box>
