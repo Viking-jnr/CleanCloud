@@ -23,7 +23,7 @@ const Cards = ({ clothName, image, addItem, photo, onCountChange }) => {
     const [ count, setCount ] = useState(0);
     const updateCount = (newCount) => {
         setCount(newCount);
-        onCountChange(clothName, newCount)
+        onCountChange(clothName, newCount);
     }
     const handleIncrement = () => updateCount(count + 1);
     const handleDecrement = () => updateCount(count > 0 ? count - 1 : 0);
@@ -38,7 +38,7 @@ const Cards = ({ clothName, image, addItem, photo, onCountChange }) => {
     };
 
     return (
-        <Card sx={{width: 100, height: 130, alignItems: 'space-between', '&:hover': {bgcolor: '#d3ebf7ff'}}}>
+        <Card sx={{width: 100, height: 140, alignItems: 'space-between', '&:hover': {bgcolor: '#d3ebf7ff'}}}>
             <CardActionArea onClick={(!photo && !addItem)? handleIncrement: null}>
             <Box mb={1} mt={1} alignItems={'center'} display={'flex'} justifyContent={'center'}>
                 <Typography variant="caption1"  fontSize={'0.9rem'} textAlign={'center'} >
@@ -113,62 +113,62 @@ const NewOrder = () => {
     
 
     //Laundry clothes
-    const Laundry = [
+    const [ Laundry, setLaundry] = useState([
         { name: 'Laundry', image: getImage('Laundry')},
-        { name: 'Duvet', image: getImage('Duvet')},
-        { name: 'Duvet, cover', image: getImage('DuvetCovet')},
-        { name: 'Duvet, Feather', image: getImage('DuvetFeather')},
-        { name: 'Pillow Case', image: getImage('Pillow')},
-        { name: 'Polo Shirt', image: getImage('PoloShirt')},
-        { name: 'Sheet', image: getImage('Sheet')},
-        { name: 'Shirt', image: getImage('Shirt')},
-        { name: 'T-Shirt', image: getImage('T-shirt')},
-        { name: 'Tablecloth', image: getImage('TableCloth')},
-        { name: 'Towel, L', image: getImage('Towel')},
-        { name: 'Towel, S', image: getImage('TowelS')},
-    ]
+        { name: 'Duvet', image: getImage('Duvet'), price: 12.00 },
+        { name: 'Duvet, cover', image: getImage('DuvetCovet'), price: 5.50},
+        { name: 'Duvet, Feather', image: getImage('DuvetFeather'), price: 16.00},
+        { name: 'Pillow Case', image: getImage('Pillow'), price: 2.00},
+        { name: 'Polo Shirt', image: getImage('PoloShirt'), price: 2.50},
+        { name: 'Sheet', image: getImage('Sheet'), price: 4.00},
+        { name: 'Shirt', image: getImage('Shirt'), price: 2.00},
+        { name: 'T-Shirt', image: getImage('T-shirt'), price: 2.00},
+        { name: 'Tablecloth', image: getImage('TableCloth'), price: 5.00},
+        { name: 'Towel, L', image: getImage('Towel'), price: 3.50},
+        { name: 'Towel, S', image: getImage('TowelS'), price: 16.00},
+    ])
 
     //Pressed/Ironed clothes
-    const Pressed = [
-        { name: 'Hat', image: getImage('Hat') },
-        { name: 'Jeans', image: getImage('Jeans') },
-        { name: 'Jumpsuit', image: getImage('Jumpsuit') },
-        { name: 'Shirt', image: getImage('Shirt') },
-        { name: 'Skirt', image: getImage('Skirt') },
-        { name: 'Skirt, pleated', image: getImage('PleatedSkirt') },
-        { name: 'Socks', image: getImage('Socks') },
-        { name: 'T-Shirt', image: getImage('P-Tshirt') },
-        { name: 'Tie', image: getImage('Tie') },
-        { name: 'Underpants', image: getImage('Underpants') },
-    ]
+    const [ Pressed, setPressed ] = useState([
+        { name: 'Hat', image: getImage('Hat'), price: 1.10 },
+        { name: 'Jeans', image: getImage('Jeans'), price: 2.00 },
+        { name: 'Jumpsuit', image: getImage('Jumpsuit'), price: 1.20 },
+        { name: 'Shirt', image: getImage('Shirt'), price: 1.30 },
+        { name: 'Skirt', image: getImage('Skirt'), price: 2.00 },
+        { name: 'Skirt, pleated', image: getImage('PleatedSkirt'), price: 4.00 },
+        { name: 'Socks', image: getImage('Socks'), price: 1 },
+        { name: 'T-Shirt', image: getImage('P-Tshirt'), price: 1.30 },
+        { name: 'Tie', image: getImage('Tie'), price: 1.7 },
+        { name: 'Underpants', image: getImage('Underpants'), price: 1.1 },
+    ])
 
     //Repairs Clothes
-    const Repairs = [
-        { name: '1/4 Iron', image: getImage('Iron')},
-        { name: 'Leather Heel', image: getImage('LeatherHeel')},
-        { name: 'Leather Sole', image: getImage('LeatherSole')},
-        { name: 'Rubber Heel', image: getImage('RubberHeel')},
-        { name: 'Rubber Sole', image: getImage('RubberSole')},
-        { name: 'Stiletto', image: getImage('Stilletto')},
-    ]
+    const [Repairs, setRepairs] = useState([
+        { name: '1/4 Iron', image: getImage('Iron'), price: 12.50},
+        { name: 'Leather Heel', image: getImage('LeatherHeel'), price: 10 },
+        { name: 'Leather Sole', image: getImage('LeatherSole'), price: 45},
+        { name: 'Rubber Heel', image: getImage('RubberHeel'), price: 9},
+        { name: 'Rubber Sole', image: getImage('RubberSole'), price: 15},
+        { name: 'Stiletto', image: getImage('Stilletto'), price: 9},
+    ])
 
     //Alterations clothes
-    const Alterations = [
-        { name: 'New Zip', image: getImage('Zip')},
-        { name: 'Skirt, length', image: getImage('SkirtLength')},
-        { name: 'Sleeve, length', image: getImage('SleeveLength')},
-        { name: 'Trouser, length', image: getImage('TrouserLength')},
-        { name: 'Trouser, waist', image: getImage('TrouserWaist')},
-    ]
+    const [Alterations, setAlterations] = useState([
+        { name: 'New Zip', image: getImage('Zip'), price: 10},
+        { name: 'Skirt, length', image: getImage('SkirtLength'), price: 10},
+        { name: 'Sleeve, length', image: getImage('SleeveLength'), price: 25},
+        { name: 'Trouser, length', image: getImage('TrouserLength'), price: 10},
+        { name: 'Trouser, waist', image: getImage('TrouserWaist'), price: 10},
+    ])
 
     //State to handle card clicks
     const [cardClick, setCardClick ] = useState({});
-    const handleCardClick = (name, count) => {
+    const handleCardClick = (name, count, array) => {
         setCardClick((prev) => ({
             ...prev,
             [name] : {
                 count, 
-                price: dryCleaning.find((item) => item.name === name )?.price || 0,
+                price: array.find((item) => item.name === name )?.price || 0,
             },
         }));
     }
@@ -190,7 +190,7 @@ const NewOrder = () => {
                         <Grid container spacing={1}>
                             {dryCleaning.map((cloth, index) => (
                                 <Grid item key={index}>
-                                    <Cards clothName={cloth.name} image={cloth.image} onCountChange={handleCardClick}/>
+                                    <Cards clothName={cloth.name} image={cloth.image} onCountChange={(name, count)=>handleCardClick(name, count, dryCleaning)}/>
                                 </Grid>
                             ))}
                             <Grid item>
@@ -206,7 +206,7 @@ const NewOrder = () => {
                         <Grid container spacing={1}>
                             {Laundry.map((cloth, index) => (
                                 <Grid item key={index}>
-                                    <Cards clothName={cloth.name} image={cloth.image} />
+                                    <Cards clothName= {cloth.name} image={cloth.image} onCountChange={(name, count)=>handleCardClick(name, count, Laundry)} />
                                 </Grid>
                             ))}
                             <Grid item>
@@ -222,7 +222,7 @@ const NewOrder = () => {
                         <Grid container spacing={1}>
                             {Pressed.map((cloth, index) => (
                                 <Grid item key={index}>
-                                    <Cards clothName={cloth.name} image={cloth.image} />
+                                    <Cards clothName={cloth.name} image={cloth.image} onCountChange={(name, count)=>handleCardClick(name, count, Pressed)} />
                                 </Grid>
                             ))}
                             <Grid item>
@@ -238,7 +238,7 @@ const NewOrder = () => {
                         <Grid container spacing={1}>
                             {Repairs.map((cloth, index) => (
                                 <Grid item key={index}>
-                                    <Cards clothName={cloth.name} image={cloth.image} />
+                                    <Cards clothName={cloth.name} image={cloth.image} onCountChange={(name, count)=>handleCardClick(name, count, Repairs)} />
                                 </Grid>
                             ))}
                             <Grid item>
@@ -254,7 +254,7 @@ const NewOrder = () => {
                         <Grid container spacing={1}>
                             {Alterations.map((cloth, index) => (
                                 <Grid item key={index}>
-                                    <Cards clothName={cloth.name} image={cloth.image}  />
+                                    <Cards clothName={cloth.name} image={cloth.image} onCountChange={(name, count)=>handleCardClick(name, count, Alterations)} />
                                 </Grid>
                             ))}
                             <Grid item>
